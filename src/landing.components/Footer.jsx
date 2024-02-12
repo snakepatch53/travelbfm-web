@@ -20,7 +20,7 @@ export default function Footer() {
                         <Link to="">Contactos</Link>
                     </div>
                     <div className="flex flex-1">
-                        <span className="w-full text-end bg-gray-300">
+                        <span className="w-full text-end ">
                             © 2024 Todos los derechos reservados.
                         </span>
                     </div>
