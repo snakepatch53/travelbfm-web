@@ -1,10 +1,10 @@
 import Button from "./Button";
+import Title from "./Title";
 
 export default function Menu() {
     return (
         <div className="flex flex-col items-center">
-            <h3 className="font-title2 text-center text-5xl text-[--c3-txt2]">Menú</h3>
-            <img src="/image/title.png" alt="" />
+            <Title text="Menú" />
             <div className="flex flex-col sm:flex-row gap-2 pt-5">
                 <Button text="TODOS LOS PLATOS" tag="button" style="2" />
                 <Button text="DESAYUNO" tag="button" style="2" />

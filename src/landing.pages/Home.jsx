@@ -5,6 +5,7 @@ import Menu from "../landing.components/Menu";
 import Reserve from "../landing.components/Reserve";
 import Partners from "../landing.components/Partners";
 import Form from "../landing.components/Form";
+import Review from "../landing.components/Review";
 
 export default function Home() {
     return (
@@ -16,7 +17,7 @@ export default function Home() {
             <section>
                 <Reserve />
             </section>
-            <section className="relative z-10 p-[--pdd]">
+            <section className="relative z-10 px-[--pdd] py-20">
                 <div className="container">
                     <Menu />
                 </div>
@@ -32,8 +33,15 @@ export default function Home() {
                     <Partners />
                 </div>
             </section>
-            <section className=" p-[--pdd]">
-                <Form />
+            <section className=" px-[--pdd] py-20">
+                <div className="container">
+                    <Form />
+                </div>
+            </section>
+            <section className="px-[--pdd] py-20">
+                <div className="container">
+                    <Review />
+                </div>
             </section>
         </PageContent>
     );

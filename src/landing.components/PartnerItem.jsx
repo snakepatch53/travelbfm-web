@@ -15,7 +15,7 @@ export default function Item({
         <Link
             to={to}
             className={clsx(
-                "w-full flex flex-col items-center gap-3 text-[--c4-txt]",
+                "w- flex flex-col items-center gap-3 text-[--c4-txt]",
                 classNameWrapper
             )}
         >

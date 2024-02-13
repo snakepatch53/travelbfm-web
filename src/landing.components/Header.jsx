@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { clsx } from "clsx";
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
+import Button from "./Button";
 
 export default function Header() {
     const [isScrolled, setIsScrolled] = useState(false);
@@ -22,13 +23,15 @@ export default function Header() {
                         <img
                             src="/img/logo.png"
                             alt="Logo de Travel BFM"
-                            className="w-full h-full object-contain"
+                            className={clsx("w-full h-full object-contain", {
+                                "brightness-0 invert": !isScrolled,
+                            })}
                         />
                     </Link>
                     <nav
                         className={clsx(
-                            "fixed flex flex-col justify-center w-full max-w-96 pb-36 gap-4 top-0 h-dvh bg-white transition-all duration-300",
-                            "lg:static lg:flex-row lg:h-auto lg:pb-0 lg:right-0 lg:opacity-100 lg:w-auto lg:max-w-none lg:bg-transparent",
+                            "fixed flex flex-col justify-center items-center w-full max-w-96 pb-36 gap-4 top-0 h-dvh bg-white transition-all duration-300",
+                            "lg:static lg:flex-row lg:h-auto lg:pb-0 lg:right-0 lg:opacity-100  lg:max-w-none lg:bg-transparent lg:ml-10",
                             {
                                 "right-0 opacity-100": isMenuOpen,
                                 "-right-full opacity-0": !isMenuOpen,
@@ -39,6 +42,23 @@ export default function Header() {
                         <Option isScrolled={isScrolled} name="Ver la carta" to="/business" />
                         <Option isScrolled={isScrolled} name="Sobre nosotros" to="/about" />
                         <Option isScrolled={isScrolled} name="Contactos" to="/contact" />
+                        <Button
+                            text="Inicial Sesión"
+                            to="/login"
+                            style="2"
+                            classNameWrapper="group lg:ml-auto border-none uppercase py-2 lg:translate-x-[13px] hover:bg-white"
+                            classNameText={clsx("group-hover:text-black", {
+                                "text-black": isScrolled,
+                                "text-white": !isScrolled,
+                            })}
+                        />
+                        <Button
+                            text="Registrarse"
+                            to="/register"
+                            style="2"
+                            classNameWrapper="group border-none uppercase bg-[--c1-bg] py-2 hover:bg-white"
+                            classNameText="group-hover:text-black text-white"
+                        />
                     </nav>
                     <button
                         className={clsx(
@@ -58,7 +78,7 @@ export default function Header() {
     );
 }
 
-function Option({ isScrolled, name, to }) {
+function Option({ isScrolled, name, to, className = "" }) {
     const { pathname } = useLocation();
     const isActive = pathname === to;
     return (
@@ -67,6 +87,7 @@ function Option({ isScrolled, name, to }) {
             className={clsx(
                 "font-link uppercase text-base text-nowrap tracking-wide hover:text-[--c1] transition-colors duration-200 text-center w-full py-3",
                 "lg:w-auto lg:py-0",
+                className,
                 {
                     "text-black": isScrolled && !isActive,
                     "lg:text-white": !isScrolled && !isActive,

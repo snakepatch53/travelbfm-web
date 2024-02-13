@@ -1,0 +1,37 @@
+[
+    {
+        "id": 1,
+        "name": "Alex",
+        "title": "Manager",
+        "description": "rem iP5um dolor amet, consectetur adipi5icing elit, do eiusmod tempor incididunt Ut labore dolore magna aliaua. ",
+        "img": "/customers/1.png"
+    },
+    {
+        "id": 2,
+        "name": "Rapuncel",
+        "title": "Gerente",
+        "description": "Conoce nuestra variedad de platillos",
+        "img": "/customers/2.png"
+    },
+    {
+        "id": 3,
+        "name": "Juan",
+        "title": "holas",
+        "description": "rem iP5um dolor amet, consectetur adipi5icing elit, do eiusmod tempor incididunt Ut labore dolore magna aliaua. ",
+        "img": "/customers/3.png"
+    },
+    {
+        "id": 4,
+        "name": "Marco",
+        "title": "M",
+        "description": "Lorem iP5um dolor amet, consectetur adipi5icing elit, do eiusmod tempor incididunt Ut labore dolore magna aliaua. Ut enim ad minim nostrud exercitation ullarnco nisi.",
+        "img": "/customers/4.png"
+    },
+    {
+        "id": 5,
+        "name": "Luis",
+        "title": "Diseñador",
+        "description": "holis",
+        "img": "/customers/5.png"
+    }
+]

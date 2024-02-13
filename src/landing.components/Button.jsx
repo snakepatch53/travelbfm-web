@@ -23,8 +23,20 @@ export default function Button({
 
     let childrenDefault = (
         <>
-            <div className={clsx("font-link tracking-wide", classNameText)}>{text}</div>
-            {icon && <FontAwesomeIcon icon={icon} className={clsx("", classNameIcon)} />}
+            <div
+                className={clsx(
+                    "font-link tracking-wide transition-all duration-100",
+                    classNameText
+                )}
+            >
+                {text}
+            </div>
+            {icon && (
+                <FontAwesomeIcon
+                    icon={icon}
+                    className={clsx("transition-all duration-200", classNameIcon)}
+                />
+            )}
         </>
     );
 

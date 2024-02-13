@@ -48,7 +48,7 @@ export default function Slider() {
                                     text="Ver Menu"
                                     to="/menu"
                                     icon={faArrowRight}
-                                    classNameWrapper="mt-20"
+                                    classNameWrapper="mt-16"
                                     classNameIcon="group-hover/button:translate-x-1 transition-translate duration-100"
                                 />
                             </div>

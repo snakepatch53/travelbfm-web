@@ -4,15 +4,11 @@ import "swiper/css";
 
 import partners from "../mook/partners.json";
 import Item from "./PartnerItem";
+import Title from "./Title";
 export default function Partners() {
     return (
         <div className="relative flex flex-col gap-20 ">
-            <div className="flex flex-col items-center">
-                <h3 className="font-title2 text-center text-5xl text-[--c1-txt]">
-                    Nuestros Restaurantes
-                </h3>
-                <img src="/image/title.png" className="invert brightness-0" />
-            </div>
+            <Title text="Nuestra Historia" dark big />
             <Swiper
                 className="w-full h-full"
                 modules={[Autoplay, EffectFade]}
@@ -22,6 +18,7 @@ export default function Partners() {
                 spaceBetween={40}
                 slidesPerView={5}
                 breakpoints={{
+                    0: { slidesPerView: 1 },
                     320: { slidesPerView: 1 },
                     640: { slidesPerView: 2 },
                     768: { slidesPerView: 3 },

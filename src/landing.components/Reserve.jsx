@@ -1,4 +1,5 @@
 import Button from "./Button";
+import Title from "./Title";
 
 export default function Reserve() {
     return (
@@ -11,12 +12,7 @@ export default function Reserve() {
 
             <div className="absolute inset-0 bg-black/70 backdrop-blur-sm" />
             <div className=" relative z-10 flex flex-col items-center py-52 gap-10">
-                <div className="flex flex-col items-center">
-                    <h3 className="font-title2 text-center text-7xl text-white">
-                        !Reservar ahora¡
-                    </h3>
-                    <img src="/image/title.png" className="opacity-80 invert brightness-0" />
-                </div>
+                <Title text="Reserva Ahora" dark big />
                 <Button
                     text="Reservar"
                     to="/business"
