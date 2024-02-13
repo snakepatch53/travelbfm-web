@@ -26,7 +26,7 @@ export default function Form() {
                     </form>
                 </div>
                 <div className="flex flex-1">
-                    <img src="/image/foo" alt="" />
+                    <img src="/image/food1.jpg" alt="" />
                 </div>
             </div>
         </div>

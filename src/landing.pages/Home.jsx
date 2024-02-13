@@ -32,7 +32,7 @@ export default function Home() {
                     <Partners />
                 </div>
             </section>
-            <section>
+            <section className=" p-[--pdd]">
                 <Form />
             </section>
         </PageContent>
