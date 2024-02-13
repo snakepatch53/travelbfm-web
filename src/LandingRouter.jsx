@@ -1,8 +1,8 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import Header from "./landing.components/Header";
 import Footer from "./landing.components/Footer";
 import Home from "./landing.pages/Home";
-// import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
+import Header from "./landing.components/Header";
+import Business from "./landing.pages/Business";
 
 export default function LandingRouter() {
     return (
@@ -11,6 +11,7 @@ export default function LandingRouter() {
                 <Header />
                 <Routes>
                     <Route path="/" element={<Home />} />
+                    <Route path="/business" element={<Business />} />
                 </Routes>
                 <Footer />
             </BrowserRouter>

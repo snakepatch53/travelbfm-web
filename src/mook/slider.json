@@ -1,0 +1,30 @@
+[
+    {
+        "id": 1,
+        "title": "Nuestro Menu",
+        "subtitle": "Conoce nuestra variedad de platillos",
+        "to": "/menu",
+        "img": "/image/food2.jpg"
+    },
+    {
+        "id": 2,
+        "title": "Comida saludable",
+        "subtitle": "Disfruta de alimentos saludables",
+        "to": "/about",
+        "img": "/image/food3.jpg"
+    },
+    {
+        "id": 3,
+        "title": "Variedad de platillos",
+        "subtitle": "No tienes que preocuparte por la variedad",
+        "to": "/menu",
+        "img": "/image/food4.jpg"
+    },
+    {
+        "id": 4,
+        "title": "Bebidas",
+        "subtitle": "Tambien puedes encontrar bebidas",
+        "to": "/menu",
+        "img": "/image/drink1.jpg"
+    }
+]

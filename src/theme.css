@@ -1,10 +1,18 @@
 :root {
-    --c1-bg: #1e4a5e;
-    --c1-txt: #caff92;
+    --c1: #00cd56;
 
-    --c2-bg: #ddffb8;
+    --c1-bg: #242f3a;
+    --c1-txt: #fff;
+
+    --c2-bg: #00cd56;
     --c2-txt: #1f1f1f;
 
     --c3-bg: #d8d8d8;
     --c3-txt: #0c0c0c;
+    --c3-txt2: #00cd56;
+
+    --c4-bg: #292d3e;
+    --c4-txt: #d8d8d8;
+
+    --c5-bg: rgba(31, 31, 31, 0.815);
 }

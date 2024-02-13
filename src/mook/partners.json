@@ -1,0 +1,44 @@
+[
+    {
+        "id": 1,
+        "title": "Nuestro Menu",
+        "subtitle": "Conoce nuestra variedad de platillos",
+        "to": "/menu",
+        "img": "/image/food1.jpg"
+    },
+    {
+        "id": 2,
+        "title": "Restaurant",
+        "subtitle": "Conoce nuestra variedad de platillos",
+        "to": "/menu",
+        "img": "/image/food2.jpg"
+    },
+    {
+        "id": 3,
+        "title": "Restaurant 2",
+        "subtitle": "Conoce nuestra variedad de platillos",
+        "to": "/menu",
+        "img": "/image/food3.jpg"
+    },
+    {
+        "id": 4,
+        "title": "Restaurant 3",
+        "subtitle": "Conoce nuestra variedad de platillos",
+        "to": "/menu",
+        "img": "/image/food4.jpg"
+    },
+    {
+        "id": 5,
+        "title": "Restaurant 4",
+        "subtitle": "Conoce nuestra variedad de platillos",
+        "to": "/menu",
+        "img": "/image/food2.jpg"
+    },
+    {
+        "id": 6,
+        "title": "Restaurant 5",
+        "subtitle": "Conoce nuestra variedad de platillos",
+        "to": "/menu",
+        "img": "/image/drink1.jpg"
+    }
+]
