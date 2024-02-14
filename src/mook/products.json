@@ -1,0 +1,50 @@
+[
+    {
+        "id": 1,
+        "name": "Maracuyá Haze",
+        "desc": "Es una cerveza golden ale madurada con pulpa de maracuyá grado alcoholico 5 grados amargor: 15",
+        "price": 2.5,
+        "partner": "Hendrix",
+        "src": "/products/1.jpg"
+    },
+    {
+        "id": 2,
+        "name": "Strong Bitter",
+        "desc": "Aroma: a lupulo moderada media alta tipicamente con caracter floral terroso y recinoso aroma malta media alta apariencia: flavor, medio, con evidentes aromas a maltas, el perfil de la malta es a pan biscoso y un poco tostado, con un sabor a caramelo bajo alcohol: 5.4 grados",
+        "price": 2.5,
+        "partner": "Hendrix",
+        "src": "/products/2.jpg"
+    },
+    {
+        "id": 3,
+        "name": "Costillas BBQ",
+        "desc": "Costillas bbq con papas fritas o cosinadas",
+        "price": 7.75,
+        "partner": "Musap bar",
+        "src": "/products/3.jpg"
+    },
+    {
+        "id": 4,
+        "name": "FILETE DE PAICHE",
+        "desc": "Filete de paiche al vapor, a la parrilla y apanado",
+        "price": 12.0,
+        "partner": "Roncos restaurant",
+        "src": "/products/4.jpg"
+    },
+    {
+        "id": 5,
+        "name": "SALMÓN A LA PLANCHA",
+        "desc": "Con vegetales a la parrilla",
+        "price": 12.0,
+        "partner": "Roncos restaurant",
+        "src": "/products/5.jpg"
+    },
+    {
+        "id": 6,
+        "name": "Papi pollo",
+        "desc": "Papas fritas con un pollo exquisito",
+        "price": 5.5,
+        "partner": "Comida rapida doña pachi",
+        "src": "/products/6.jpg"
+    }
+]

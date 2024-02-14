@@ -10,6 +10,7 @@ const Home = lazy(() => import("./landing.pages/Home"));
 const Business = lazy(() => import("./landing.pages/Business"));
 const About = lazy(() => import("./landing.pages/About"));
 const Contact = lazy(() => import("./landing.pages/Contact"));
+const Login = lazy(() => import("./landing.pages/Login"));
 
 export default function LandingRouter() {
     document.title = info.name;
@@ -22,6 +23,7 @@ export default function LandingRouter() {
                     <Route path="/business" element={<Business info={info} />} />
                     <Route path="/about" element={<About info={info} />} />
                     <Route path="/contact" element={<Contact info={info} />} />
+                    <Route path="/login" element={<Login info={info} />} />
                 </Routes>
                 <Footer info={info} />
             </BrowserRouter>
