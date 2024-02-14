@@ -45,8 +45,8 @@ export default function Slider() {
                                     {item.subtitle}
                                 </p>
                                 <Button
-                                    text="Ver Menu"
-                                    to="/menu"
+                                    text={item.button}
+                                    to={item.to}
                                     icon={faArrowRight}
                                     classNameWrapper="mt-16"
                                     classNameIcon="group-hover/button:translate-x-1 transition-translate duration-100"

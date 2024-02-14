@@ -5,15 +5,14 @@ import Title from "./Title";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faQuoteLeft } from "@fortawesome/free-solid-svg-icons";
 
-export default function Review() {
+export default function Review({ info }) {
     return (
         <div>
             <div className="flex flex-col items-center ">
                 <Title text="Nuestros Clientes" big />
                 <p className="text-base sm:px-20 lg:px-60 text-center font-content opacity-80 mt-5">
-                    Lorem iP5um dolor amet, consectetur adipi5icing elit, do eiusmod tempor
-                    incididunt Ut labore dolore magna aliaua. Ut enim ad minim nostrud exercitation
-                    ullarnco nisi.
+                    Lee las reseñas de nuestros clientes y descubre por qué eligen nuestra empresa
+                    para sus necesidades.
                 </p>
             </div>
             <div className="max-w-[900px] mx-auto">
@@ -46,10 +45,9 @@ export default function Review() {
                     ))}
                 </Swiper>
                 <ItemReview
-                    text="Lorem iP5um dolor amet, consectetur adipi5icing elit, do eiusmod tempor incididunt Ut labore dolore magna aliaua. Ut enim ad minim nostrud exercitation ullarnco nisi."
+                    text={`¡Increíble experiencia con ${info.name}! Su calidad, funcionalidad y atención al cliente son excepcionales. Recomiendo totalmente ${info.name} a todos.`}
                     src="/img/happygirld.png"
                     name="Alexandra"
-                    title="Manager"
                 />
             </div>
         </div>
@@ -57,7 +55,7 @@ export default function Review() {
 }
 // img/happygirld.png
 
-function ItemReview({ src, text, name, title }) {
+function ItemReview({ src, text, name }) {
     return (
         <div className="relative flex flex-col font-content items-center shadow-xl p-3 sm:p-10">
             <img
@@ -68,9 +66,15 @@ function ItemReview({ src, text, name, title }) {
                 icon={faQuoteLeft}
                 className="text-3xl text-[--c3-txt2]"
             ></FontAwesomeIcon>
-            <p className="text-sm text-center p-5 opacity-70">{text}</p>
+            <p
+                className="text-sm text-center p-5 opacity-80"
+                style={{
+                    textShadow: "0 0 10px rgba(0,0,0,0.5)",
+                }}
+            >
+                {text}
+            </p>
             <h3 className="font-title text-xl text-[--c3-txt2] ">{name}</h3>
-            <span className="text-sm">{title}</span>
         </div>
     );
 }

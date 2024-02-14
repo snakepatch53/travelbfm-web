@@ -1,44 +1,44 @@
 [
     {
         "id": 1,
-        "title": "Nuestro Menu",
-        "subtitle": "Conoce nuestra variedad de platillos",
-        "to": "/menu",
-        "img": "/image/food1.jpg"
+        "title": "HENDRIX",
+        "subtitle": "Cerveza artesanal, alitas con diferentes salsas, nachos y hamburguesas",
+        "link": "https://marea.pro/hendrix",
+        "img": "/businesses/1.jpg"
     },
     {
         "id": 2,
-        "title": "Restaurant",
-        "subtitle": "Conoce nuestra variedad de platillos",
-        "to": "/menu",
-        "img": "/image/food2.jpg"
+        "title": "MUSAP BAR",
+        "subtitle": "Exquisitos platos hechos para ti",
+        "link": "https://marea.pro/musap",
+        "img": "/businesses/2.jpg"
     },
     {
         "id": 3,
-        "title": "Restaurant 2",
-        "subtitle": "Conoce nuestra variedad de platillos",
-        "to": "/menu",
-        "img": "/image/food3.jpg"
+        "title": "RONCOS RESTAURANT",
+        "subtitle": "Menú de exquisitos platos hechos para paladares selectos",
+        "link": "https://marea.pro/roncos",
+        "img": "/businesses/3.jpg"
     },
     {
         "id": 4,
-        "title": "Restaurant 3",
-        "subtitle": "Conoce nuestra variedad de platillos",
-        "to": "/menu",
-        "img": "/image/food4.jpg"
+        "title": "COMIDA RAPIDA DOÑA PACHI",
+        "subtitle": "Menú de exquisitos platos que se sirven en nuestro local de comida",
+        "link": "https://marea.pro/menupachi",
+        "img": "/businesses/4.jpg"
     },
     {
         "id": 5,
-        "title": "Restaurant 4",
-        "subtitle": "Conoce nuestra variedad de platillos",
-        "to": "/menu",
-        "img": "/image/food2.jpg"
+        "title": "NILA EMPANADAS",
+        "subtitle": "Relleno de felicidad en cada empanada",
+        "link": "https://marea.pro/nilaempanadas",
+        "img": "/businesses/5.jpg"
     },
     {
         "id": 6,
-        "title": "Restaurant 5",
-        "subtitle": "Conoce nuestra variedad de platillos",
-        "to": "/menu",
-        "img": "/image/drink1.jpg"
+        "title": "TISHOS PIZZA",
+        "subtitle": "Exquisitos platos hechos para ti",
+        "link": "https://marea.pro/tishospizza",
+        "img": "/businesses/6.jpg"
     }
 ]

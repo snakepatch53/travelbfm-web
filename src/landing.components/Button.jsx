@@ -42,13 +42,13 @@ export default function Button({
 
     if (children) childrenDefault = children;
 
-    if (tag === "button") {
+    if (tag == "button") {
         return (
             <button className={buttonClassNames} {...props}>
                 {childrenDefault}
             </button>
         );
-    } else if (tag === "a") {
+    } else if (tag == "a") {
         return (
             <a className={buttonClassNames} {...props}>
                 {childrenDefault}

@@ -3,12 +3,12 @@ import { Autoplay, EffectFade } from "swiper/modules";
 import "swiper/css";
 
 import partners from "../mook/partners.json";
-import Item from "./PartnerItem";
+import PartnerItem from "./PartnerItem";
 import Title from "./Title";
 export default function Partners() {
     return (
         <div className="relative flex flex-col gap-20 ">
-            <Title text="Nuestra Historia" dark big />
+            <Title text="Nuestros Asociados" dark big />
             <Swiper
                 className="w-full h-full"
                 modules={[Autoplay, EffectFade]}
@@ -28,11 +28,16 @@ export default function Partners() {
             >
                 {partners.map((item) => (
                     <SwiperSlide key={item.id} className="relative w-full h-full">
-                        <Item
+                        <PartnerItem
                             img={item.img}
                             title={item.title}
                             text={item.subtitle}
-                            href={item.to}
+                            href={item.link}
+                            tag="a"
+                            classNameWrapper="group"
+                            classNameImg="group-hover:scale-100 object-contain"
+                            classNameTitle="group-hover:underline"
+                            classNameText="group-hover:underline"
                         />
                     </SwiperSlide>
                 ))}

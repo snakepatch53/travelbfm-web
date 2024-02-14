@@ -15,22 +15,37 @@ export default function History() {
                         <div className="flex flex-col items-center justify-center">
                             <Title text="Nuestra Historia" />
                         </div>
-                        <div className="flex flex-col md:flex-row gap-10 font-content text-sm items-center">
-                            <p className="big-first-letter ">
-                                Menc non elit libero. Quisque massa porta ut placerat lentesque non
-                                diam. Nam convallis porta rhoncus. Maecenas varius eget turpis
-                                suscipit porta sapien tinc Mauris tempor libero fringilla orci
-                                vivrra faucibue fringilla orci vivrra faucibus. Integer ullamcorper
-                                erat in tellus efficitur, quis porta sapien tincidunt. Nunc mattis
-                                lectus sed semper semper.
+                        <div className="big-first-letter columns-1 md:columns-2 gap-10 font-content text-sm text-justify opacity-90">
+                            <p className="mb-3">
+                                En el corazón de Sucúa, la comida es una celebración arraigada en
+                                nuestras tradiciones y comunidad. Desde tiempos antiguos, nuestros
+                                platos han honrado nuestras raíces, fusionando sabores locales con
+                                influencias culinarias globales. Nuestros agricultores y pescadores
+                                nos brindan ingredientes frescos y auténticos que son la esencia
+                                misma de nuestra cocina.
                             </p>
-                            <p>
-                                Menc non elit libero. Quisque massa porta ut placerat lentesque non
-                                diam. Nam convallis porta rhoncus. Maecenas varius eget turpis
-                                suscipit porta sapien tinc Mauris tempor libero fringilla orci
-                                vivrra faucibue fringilla orci vivrra faucibus. Integer ullamcorper
-                                erat in tellus efficitur, quis porta sapien tincidunt. Nunc mattis
-                                lectus sed semper semper.
+                            <p className="mb-3">
+                                Ven y descubre la riqueza de nuestra gastronomía, donde cada plato
+                                cuenta una historia, une a las familias y conecta a las personas con
+                                nuestras tradiciones y nuestra tierra. Te esperamos con los brazos
+                                abiertos para una experiencia culinaria inolvidable en Sucúa.
+                            </p>
+                            <p className="mb-3">
+                                La comida en Sucúa es más que una necesidad; es una experiencia
+                                sensorial que despierta los sentidos y lleva a nuestros visitantes
+                                en un viaje culinario único. Desde los aromas tentadores de los
+                                puestos callejeros hasta los refinados sabores de la alta cocina
+                                internacional, Sucúa ofrece un festín para todos los gustos y
+                                ocasiones.
+                            </p>
+                            <p className="mb-3">
+                                La magia de Sucúa radica en su diversidad culinaria y su compromiso
+                                con los productos locales. Cada plato es un homenaje a nuestros
+                                antepasados y un testimonio de la riqueza cultural que define a
+                                nuestro querido cantón. Te invitamos a sumergirte en el deleite
+                                culinario de Sucúa, donde la mesa está siempre lista para recibirte
+                                y donde cada bocado te lleva en un viaje a través de los sabores y
+                                las historias de nuestra tierra.
                             </p>
                         </div>
                         <img src="/img/firma.png" alt="" className="p-5 " />

@@ -7,7 +7,7 @@ import Partners from "../landing.components/Partners";
 import Form from "../landing.components/Form";
 import Review from "../landing.components/Review";
 
-export default function Home() {
+export default function Home({ info }) {
     return (
         <PageContent className="min-h-screen">
             <Slider />
@@ -35,12 +35,12 @@ export default function Home() {
             </section>
             <section className=" px-[--pdd] py-20">
                 <div className="container">
-                    <Form />
+                    <Form info={info} />
                 </div>
             </section>
             <section className="px-[--pdd] py-20">
                 <div className="container">
-                    <Review />
+                    <Review info={info} />
                 </div>
             </section>
         </PageContent>
