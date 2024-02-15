@@ -87,7 +87,7 @@ export default function Users() {
                 isOpen={table}
                 onRowPrint={(item) => (
                     <tr key={item.id}>
-                        <CrudTableTdImage src={item.photo} alt={"Foto " + item.name} />
+                        <CrudTableTdImage src={item.photo_url} alt={"Foto " + item.name} />
                         <CrudTableTdText value={item.name} />
                         <CrudTableTdText value={item.lastname} />
                         <CrudTableTdText value={item.email} />
