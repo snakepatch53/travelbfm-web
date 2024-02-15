@@ -13,6 +13,7 @@ import Register from "./pages/Register";
 const Login = lazy(() => import("./pages/Login"));
 
 function App() {
+    console.log(import.meta.env.MODE);
     const session = {
         photo_url: "https://via.placeholder.com/150",
     };
@@ -21,10 +22,10 @@ function App() {
             <BrowserRouter>
                 <Routes>
                     <Route path="/*" element={<LandingRouter info={info} />} />
-                    {/* <Route
+                    <Route
                         path="/panel/*"
                         element={<PanelRouter info={info} session={session} />}
-                    /> */}
+                    />
                     <Route path="/login" element={<Login info={info} />} />
                     <Route path="/register" element={<Register info={info} />} />
                     <Route path="*" element={<NotFound info={info} />} />

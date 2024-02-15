@@ -36,7 +36,7 @@ export default function Login({ info }) {
                     />
                     <div className="flex flex-row justify-between mt-2">
                         <Item to="/" text=" Volver al inicio" />
-                        <Item to="/" text=" Registrarse" />
+                        <Item to="/register" text=" Registrarse" />
                     </div>
                 </div>
             </form>
@@ -49,7 +49,7 @@ function Input({ text, className }) {
         <input
             placeholder={text}
             className={cls(
-                "py-2 w-full border-solid border-b border-gray-400 bg-transparent text-[--c1-txt] ",
+                "not-italic placeholder-shown:italic py-2 w-full border-solid border-b border-gray-400 bg-transparent text-[--c1-txt] ",
                 className
             )}
         />

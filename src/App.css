@@ -1,3 +1,24 @@
 .big-first-letter::first-letter {
     font-size: 200%;
 }
+
+/* Para todos los navegadores */
+input:-moz-placeholder {
+    /* Firefox */
+    background-color: transparent; /* Establece el fondo transparente */
+}
+
+/* Para WebKit (Chrome, Safari, etc.) */
+input::-webkit-input-placeholder {
+    background-color: transparent; /* Establece el fondo transparente */
+}
+
+/* Para Edge y IE */
+input::-ms-input-placeholder {
+    background-color: transparent; /* Establece el fondo transparente */
+}
+
+/* Para navegadores modernos */
+input::placeholder {
+    background-color: transparent; /* Establece el fondo transparente */
+}
