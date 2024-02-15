@@ -141,7 +141,9 @@ export default function Home({ session, updateSession }) {
                                 <Input label="Correo" name="email" value={session.email} required />
                             </CardWrapper>
                             <CardWrapper
-                                src={session.signature_url}
+                                // src={session.signature_url}
+                                src="http://localhost/api.travelbfm.com/storage/app/public/img_users/IGtaQB8t7JLHJuyfgsbriLlG4vfXI52W6Ln3GFit.png"
+                                // https://api.travelbfm.com/storage/app/public/img_users/IGtaQB8t7JLHJuyfgsbriLlG4vfXI52W6Ln3GFit.png
                                 fileName="signature"
                                 inputLabel="Seleccionar Firma"
                                 fileAccept="image/png"

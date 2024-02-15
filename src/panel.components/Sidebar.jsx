@@ -19,18 +19,17 @@ export default function Sidebar({ session }) {
                 <FontAwesomeIcon icon={faHome} />
                 <span>Inicio</span>
             </Link>
-
             <hr />
-
             <Link className="option" to="./users">
                 <FontAwesomeIcon icon={faUsers} />
                 <span>Usuarios</span>
             </Link>
+            <hr />
             <Link className="option" to="./slider">
                 <FontAwesomeIcon icon={faImage} />
                 <span>Slider</span>
             </Link>
-
+            <hr />
             <Link className="option" to="./courses">
                 <FontAwesomeIcon icon={faVideo} />
                 <span>Cursos</span>

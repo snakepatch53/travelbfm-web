@@ -82,14 +82,14 @@ export default function Users() {
             />
 
             <CrudTable
-                titles={["Foto", "Nombre", "DNI", "Email", "Privilegio"]}
+                titles={["Foto", "Nombre", "Apellido", "Email", "Privilegio"]}
                 dataList={datalist}
                 isOpen={table}
                 onRowPrint={(item) => (
                     <tr key={item.id}>
-                        <CrudTableTdImage src={item.photo_url} alt={"Foto " + item.name} />
+                        <CrudTableTdImage src={item.photo} alt={"Foto " + item.name} />
                         <CrudTableTdText value={item.name} />
-                        <CrudTableTdText value={item.dni} />
+                        <CrudTableTdText value={item.lastname} />
                         <CrudTableTdText value={item.email} />
                         <CrudTableTdText value={item.role} />
                         <CrudTableTdFlex>

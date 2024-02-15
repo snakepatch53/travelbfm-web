@@ -1,4 +1,4 @@
-import PageContent from "./PageContent";
+import PageContent from "../component/PageContent";
 
 export default function Loading() {
     return (
@@ -7,9 +7,9 @@ export default function Loading() {
                 <svg viewBox="0 0 38 38" className="max-w-14">
                     <defs>
                         <linearGradient x1="8.042%" y1="0%" x2="65.682%" y2="23.865%" id="a">
-                            <stop stopColor="#ffa830" stopOpacity="0" offset="0%" />
-                            <stop stopColor="#ffa830" stopOpacity=".631" offset="63.146%" />
-                            <stop stopColor="#ffa830" offset="100%" />
+                            <stop stopColor="#40c886" stopOpacity="0" offset="0%" />
+                            <stop stopColor="#40c886" stopOpacity=".631" offset="63.146%" />
+                            <stop stopColor="#40c886" offset="100%" />
                         </linearGradient>
                     </defs>
                     <g fill="none" fillRule="evenodd">

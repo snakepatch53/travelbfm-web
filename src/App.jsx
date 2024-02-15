@@ -8,10 +8,10 @@ import { Route } from "react-router-dom";
 import { lazy } from "react";
 import PanelRouter from "./PanelRouter";
 import NotFound from "./component/NotFound";
-import Loading from "./component/Loading";
 import AuthGuard from "./guards/AuthGuard";
 import SessionOutGuard from "./guards/SessionOutGuard";
 import { Notification } from "./component/Notification";
+import Loading from "./pages/Loading";
 
 const Login = lazy(() => import("./pages/Login"));
 const Register = lazy(() => import("./pages/Register"));

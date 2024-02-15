@@ -11,7 +11,7 @@ function mapNames(data) {
 export async function getUsers() {
     const response = await fetchAdapter({
         resource,
-        //printResponse: true
+        printResponse: true,
     });
     return mapNames(response);
 }
