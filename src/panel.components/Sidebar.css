@@ -10,7 +10,8 @@
     padding: 10px;
     border-right: solid 1px rgba(0, 0, 0, 0.5);
     box-shadow: 0 3px 6px 1px rgba(0, 0, 0, 0.3);
-    background: var(--color4-bg);
+    /* background: var(--color4-bg); */
+    background: var(--c4-bg);
     overflow-y: auto;
 }
 
@@ -31,7 +32,8 @@
     width: 100%;
     min-height: 30px;
     text-align: center;
-    color: var(--info);
+    /* color: var(--info); */
+    color: var(--c4-txt2);
     font-size: 15px;
     margin: 0 0 10px 0;
     padding: 0 0 10px 0;
@@ -57,7 +59,8 @@
     margin: 5px 0;
     padding: 0 5px;
     text-decoration: none;
-    color: var(--color4-txt);
+    /* color: var(--color4-txt); */
+    color: var(--c4-txt);
     border-radius: 2px;
 }
 
@@ -90,30 +93,18 @@
 }
 
 /*tool -> in close*/
-.panel-page
-    .panel-page-state.close
-    ~ .panel-page-content
-    .panel-sidebar-component {
+.panel-page .panel-page-state.close ~ .panel-page-content .panel-sidebar-component {
     width: 50px;
     min-width: 50px;
 }
 
-.panel-page
-    .panel-page-state.close
-    ~ .panel-page-content
-    .panel-sidebar-component
-    a.option
-    span {
+.panel-page .panel-page-state.close ~ .panel-page-content .panel-sidebar-component a.option span {
     width: 0;
     padding: 0;
     opacity: 0;
 }
 
-.panel-page
-    .panel-page-state.close
-    ~ .panel-page-content
-    .panel-sidebar-component
-    a.option.active {
+.panel-page .panel-page-state.close ~ .panel-page-content .panel-sidebar-component a.option.active {
     padding: 0 5px;
 }
 
@@ -138,19 +129,12 @@
         opacity: 0;
     }
 
-    .panel-page-state.close
-        ~ .panel-page-content
-        .panel-sidebar-component
-        img.user_img {
+    .panel-page-state.close ~ .panel-page-content .panel-sidebar-component img.user_img {
         width: 0px;
         height: 0px;
     }
 
-    .panel-page-state.close
-        ~ .panel-page-content
-        .panel-sidebar-component
-        a.option
-        span {
+    .panel-page-state.close ~ .panel-page-content .panel-sidebar-component a.option span {
         width: 0;
         padding: 0;
     }

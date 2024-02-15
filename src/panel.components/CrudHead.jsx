@@ -13,7 +13,7 @@ export default function CrudHead({
 }) {
     return (
         <section
-            className="grid gap-4 grid-cols-1 md:grid-cols-4 lg:grid-cols-3 bg-[rgba(0,0,0,0.1)] rounded-sm border-solid border-t-[3px] border-[var(--color1-bg)] shadow-[0_2px_5px_0_rgba(0,0,0,0.3)]"
+            className="grid gap-4 grid-cols-1 md:grid-cols-4 lg:grid-cols-3 bg-[--c3-bg] rounded-sm border-solid border-t-[3px] border-[var(--c3-txt3)] shadow-[0_2px_5px_0_rgba(0,0,0,0.3)]"
             style={{
                 margin: isOpen ? "0" : "0",
                 padding: isOpen ? "10px" : "0",
@@ -23,7 +23,7 @@ export default function CrudHead({
             }}
         >
             <div className="col-span-1 xl:col-span-1">
-                <h3 className="flex gap-1 w-full h-full items-center justify-center md:justify-start font-content2 font-bold text-md text-[var(--color1-bg)]">
+                <h3 className="flex gap-1 w-full h-full items-center justify-center md:justify-start font-content2 font-bold text-md text-[var(--c3-txt3)]">
                     {icon && <FontAwesomeIcon icon={icon} className="text-sm mb-1" />} {title}
                 </h3>
             </div>
@@ -45,18 +45,18 @@ export default function CrudHead({
                     </select>
                 </div>
             </div> */}
-            <div className="col-span-1 md:col-span-2 lg:col-span-1 flex w-full h-8 items-center rounded-md overflow-hidden border border-solid border-[#4799aa]">
-                <span className="flex justify-center items-center h-full px-2 bg-[#4799aa] text-white">
+            <div className="col-span-1 md:col-span-2 lg:col-span-1 flex w-full h-8 items-center rounded-md overflow-hidden border border-solid border-[--c6-bg]">
+                <span className="flex justify-center items-center h-full px-2 bg-[--c6-bg] text-[--c6-txt]">
                     Buscar:{" "}
                 </span>
-                <div className="flex items-center w-full h-full px-2 bg-white">
-                    <FontAwesomeIcon icon={faSearch} className="text-gray-400" />
+                <div className="flex items-center w-full h-full px-2 bg-[--c3-bg]">
+                    <FontAwesomeIcon icon={faSearch} className="text-[--c3-txt4]" />
                     <input
                         type="search"
                         placeholder="Busca por cualquier campo.."
                         value={searchValue}
                         onChange={searchOnChange}
-                        className="w-full pl-1"
+                        className="w-full pl-1 bg-[--c3-bg]"
                     />
                 </div>
             </div>

@@ -3,39 +3,9 @@ import { fetchAdapter } from "./../services/apiConfig";
 const resource = "users";
 
 function mapNames(data) {
-    return data.map(
-        ({
-            id,
-            name,
-            lastname,
-            dni,
-            signature,
-            email,
-            role,
-            created_at,
-            updated_at,
-            photo_url,
-            signature_url,
-            description,
-            facebook,
-            ...props
-        }) => ({
-            id,
-            name,
-            lastname,
-            dni,
-            signature,
-            email,
-            created_at,
-            updated_at,
-            photo_url,
-            signature_url,
-            role,
-            description,
-            facebook,
-            ...props,
-        })
-    );
+    return data.map(({ ...props }) => ({
+        ...props,
+    }));
 }
 
 export async function getUsers() {
@@ -90,6 +60,17 @@ export async function destroyUser({ id }) {
     return response;
 }
 
+export async function registerUser({ data }) {
+    const response = await fetchAdapter({
+        resource: "register",
+        data,
+        method: "POST",
+        all: true,
+        formData: true,
+    });
+    return response;
+}
+
 export async function login({ data }) {
     const response = await fetchAdapter({
         resource: "login",
@@ -97,7 +78,7 @@ export async function login({ data }) {
         method: "POST",
         all: true,
     });
-    if (response.success) window.localStorage.setItem("session", JSON.stringify(response));
+    // if (response.success) window.localStorage.setItem("session", JSON.stringify(response.data));
     return response;
 }
 

@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 // import { getCourses } from "../services/courses";
 // import { isCedula, isEmail, isUrl, isValidateRequired } from "../utils/validations";
-import { showNotification } from "../panel.components/Notification";
+import { showNotification } from "../component/Notification";
 import { updateUserSession } from "./../services/users";
 import CrudProgress from "../panel.components/CrudProgress";
 import PageContent from "../component/PageContent";

@@ -9,30 +9,31 @@ import { lazy } from "react";
 import PanelRouter from "./PanelRouter";
 import NotFound from "./component/NotFound";
 import Loading from "./component/Loading";
-import Register from "./pages/Register";
-const Login = lazy(() => import("./pages/Login"));
+import AuthGuard from "./guards/AuthGuard";
+import SessionOutGuard from "./guards/SessionOutGuard";
+import { Notification } from "./component/Notification";
 
-function App() {
-    console.log(import.meta.env.MODE);
-    const session = {
-        photo_url: "https://via.placeholder.com/150",
-    };
+const Login = lazy(() => import("./pages/Login"));
+const Register = lazy(() => import("./pages/Register"));
+
+export default function App() {
     return (
         <Suspense fallback={<Loading />}>
             <BrowserRouter>
+                <Notification />
                 <Routes>
                     <Route path="/*" element={<LandingRouter info={info} />} />
-                    <Route
-                        path="/panel/*"
-                        element={<PanelRouter info={info} session={session} />}
-                    />
-                    <Route path="/login" element={<Login info={info} />} />
-                    <Route path="/register" element={<Register info={info} />} />
+                    <Route element={<SessionOutGuard />}>
+                        <Route path="/login" element={<Login info={info} />} />
+                        <Route path="/register" element={<Register info={info} />} />
+                    </Route>
+                    <Route element={<AuthGuard />}>
+                        <Route path="/panel/*" element={<PanelRouter info={info} />} />
+                    </Route>
                     <Route path="*" element={<NotFound info={info} />} />
                 </Routes>
             </BrowserRouter>
         </Suspense>
     );
 }
-
-export default App;
+// function

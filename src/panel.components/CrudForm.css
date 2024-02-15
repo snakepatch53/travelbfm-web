@@ -17,7 +17,7 @@
     width: 100%;
 
     background: rgba(0, 0, 0, 0.1);
-    border-top: solid 3px var(--color1-bg);
+    border-top: solid 3px var(--c2-bg);
     border-radius: 3px;
     box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.3);
 }
@@ -57,7 +57,8 @@
     width: auto;
     margin: 0 0 0 5px;
     background: transparent;
-    color: var(--info);
+    /* color: var(--info); */
+    color: red;
     font-size: 16px;
 }
 
@@ -73,14 +74,15 @@
     flex-direction: column;
 }
 
-.panel-crudform-component .ideaform .body .campo span:not(.monaco-editor *) {
+.panel-crudform-component .ideaform .body .campo span {
     font-size: 15px;
     font-weight: bold;
-    color: var(--tertiary_color);
+    /* color: var(--tertiary_color); */
+    color: var(--c7-txt);
     margin: 0 0 5px 0;
 }
 
-.panel-crudform-component .ideaform .body .campo span b:not(.monaco-editor *) {
+.panel-crudform-component .ideaform .body .campo span b {
     color: red;
 }
 
@@ -140,7 +142,8 @@
 .panel-crudform-component .ideaform .body .campo .radios label input:checked ~ span:before {
     width: 100%;
     height: 100%;
-    background-image: linear-gradient(rgba(0, 0, 0, 0.01) 90%, var(--color1-bg) 0%);
+    /* background-image: linear-gradient(rgba(0, 0, 0, 0.01) 90%, var(--color1-bg) 0%); */
+    background-image: linear-gradient(rgba(0, 0, 0, 0.01) 90%, red 0%);
 }
 
 .panel-crudform-component .ideaform .body .campo .radios input {
@@ -152,7 +155,7 @@
     width: 100%;
     height: 35px;
     cursor: pointer;
-    --width_placeholder: 168px;
+    --width_placeholder: 172px;
 }
 
 .panel-crudform-component .ideaform .body .campo .inputfile input[type="file"]:before,
@@ -204,12 +207,13 @@
     height: 100%;
     z-index: 1;
     border-radius: 0 0 3px 3px;
-    background-image: linear-gradient(rgba(0, 0, 0, 0.1) 88%, var(--color1-bg) 0);
+    /* background-image: linear-gradient(rgba(0, 0, 0, 0.1) 88%, var(--color1-bg) 0); */
+    background-image: linear-gradient(rgba(0, 0, 0, 0.1) 88%, red 0);
     transition: all 0.3s ease;
 }
 
 .panel-crudform-component .ideaform .body .campo .inputfile input[type="file"]:hover:after {
-    width: var(--color1-bg);
+    width: var(--width_placeholder);
 }
 
 .panel-crudform-component .ideaform .body .campo .inputpass {
@@ -246,7 +250,7 @@
     min-height: 21px;
     text-align: center;
     margin: 0 0 20px 0;
-    color: var(--error);
+    color: red;
     font-size: 18px;
     text-shadow: 1px 1px 1px #fff;
 }

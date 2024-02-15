@@ -1,65 +1,60 @@
 import { Link } from "react-router-dom";
 import Button from "../landing.components/Button";
-
-/*
-{
-    "name": "Daisy Lehner",
-    "lastname": "Cummerata",
-    "photo": "http://localhost/storage/app/public/img/user.png",
-    "phone": "234.389.2779",
-    "address": "93631 Kuhlman Forge Suite 094\nNorth Anahi, KS 57381",
-    "email": "nikolas.towne@example.net"
-},
-*/
 import { cls } from "../utils/utils";
 import { ErrorMessage, Field, Formik } from "formik";
 import * as Yup from "yup";
+import { useContext, useState } from "react";
+import { faEye, faEyeSlash, faSpinner } from "@fortawesome/free-solid-svg-icons";
+import { ObjectToFormdata } from "../utils/validations";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { showNotification } from "../component/Notification";
+import { SessionContext } from "../context/session";
+import { registerUser } from "../services/users";
 
 export default function Register({ info }) {
     return (
-        <section className="relative flex justify-center items-center px-[--pdd] overflow-hidden font-content min-h-dvh">
-            <img
-                src="/image/food4.jpg"
-                alt=""
-                className="absolute inset-0 w-full h-full object-cover"
-            />
-            <div className="absolute inset-0 bg-black/90" />
+        <>
+            <section className="relative flex justify-center items-center px-[--pdd] overflow-hidden font-content min-h-dvh">
+                <img
+                    src="/image/food4.jpg"
+                    alt=""
+                    className="absolute inset-0 w-full h-full object-cover"
+                />
+                <div className="absolute inset-0 bg-black/90" />
 
-            <div className="relative z-10 flex flex-col items-center w-full max-w-[700px] bg-black/30 p-10 rounded-md">
-                <div className="flex flex-col justify-center items-center">
-                    <div className="w-full max-w-32 aspect-square bg-white rounded-full pb-7 pt-4">
-                        <img
-                            src={info.logo}
-                            alt={"Logo de " + info.name}
-                            className="w-full h-full object-contain object-center"
-                        />
+                <div className="relative z-10 flex flex-col items-center w-full max-w-[700px] bg-black/30 p-10 rounded-md">
+                    <div className="flex flex-col justify-center items-center">
+                        <div className="w-full max-w-32 aspect-square bg-white rounded-full pb-7 pt-4">
+                            <img
+                                src={info.logo}
+                                alt={"Logo de " + info.name}
+                                className="w-full h-full object-contain object-center"
+                            />
+                        </div>
+                        <h3 className="text-[--c1-txt] text-3xl text-center font-title p-5">
+                            Registrarse
+                        </h3>
                     </div>
-                    <h3 className="text-[--c1-txt] text-3xl text-center font-title p-5">
-                        Registrarse
-                    </h3>
-                </div>
-                <Form />
-                <div className="flex flex-col w-full gap-2">
-                    <div className="flex flex-row justify-between mt-2">
-                        <Item to="/" text="Volver al inicio" />
-                        <Item to="/login" text="Iniciar Sesión" />
+                    <Form />
+                    <div className="flex flex-col w-full gap-2">
+                        <div className="flex flex-row justify-between mt-2">
+                            <Item to="/" text="Volver al inicio" />
+                            <Item to="/login" text="Iniciar Sesión" />
+                        </div>
                     </div>
                 </div>
-            </div>
-        </section>
+            </section>
+        </>
     );
 }
 
 function Form() {
+    const { updateSession } = useContext(SessionContext);
+    const [isLoading, setIsLoading] = useState(false);
     const validFileExtensions = { image: ["jpg", "png", "jpeg"] };
-
-    function getAllowedExt(type) {
-        return validFileExtensions[type].map((e) => `.${e}`).toString();
-    }
-
-    function isValidFileType(fileName, fileType) {
-        return fileName && validFileExtensions[fileType].indexOf(fileName.split(".").pop()) > -1;
-    }
+    const getAllowedExt = (type) => validFileExtensions[type].map((e) => `.${e}`).toString();
+    const isValidFileType = (fileName, fileType) =>
+        fileName && validFileExtensions[fileType].indexOf(fileName.split(".").pop()) > -1;
     const MAX_FILE_SIZE = 1000000;
     let formSchema = Yup.object().shape({
         name: Yup.string()
@@ -71,14 +66,15 @@ function Form() {
             .min(3, "Mínimo 3 caracteres")
             .max(50, "Máximo 50 caracteres"),
         photo: Yup.mixed()
-            .required("La foto es requerida")
-            .test("is-valid-type", "Tipo de archivo no valido", (value) =>
-                isValidFileType(value && value.name.toLowerCase(), "image")
+            .test(
+                "is-valid-type",
+                "Tipo de archivo no valido",
+                (value) => isValidFileType(value && value.name.toLowerCase(), "image") || !value
             )
             .test(
                 "is-valid-size",
                 "El tamaño máximo es " + MAX_FILE_SIZE / 1000000 + "MB",
-                (value) => value && value.size <= MAX_FILE_SIZE
+                (value) => (value && value.size <= MAX_FILE_SIZE) || !value
             ),
         phone: Yup.string()
             .required("El celular es requerido")
@@ -93,6 +89,13 @@ function Form() {
             .email("El email no es valido")
             .min(5, "Mínimo 5 caracteres")
             .max(70, "Máximo 70 caracteres"),
+        password: Yup.string()
+            .required("La contraseña es requerida")
+            .min(8, "Mínimo 8 caracteres")
+            .max(50, "Máximo 50 caracteres"),
+        confirmPassword: Yup.string()
+            .required("La confirmación de contraseña es requerida")
+            .oneOf([Yup.ref("password"), null], "Las contraseñas no coinciden"),
     });
     return (
         <Formik
@@ -103,9 +106,33 @@ function Form() {
                 phone: "",
                 address: "",
                 email: "",
+                password: "",
+                confirmPassword: "",
             }}
             validationSchema={formSchema}
-            onSubmit={(values) => console.log(values)}
+            onSubmit={(values, { resetForm }) => {
+                setIsLoading(true);
+                if (!values.photo) delete values.photo;
+                let data = ObjectToFormdata(values);
+                registerUser({ data }).then((res) => {
+                    setIsLoading(false);
+                    if (res?.success) {
+                        updateSession(res.data);
+                        showNotification({
+                            title: "Exito",
+                            message: "Usuario creado con exito",
+                            type: "success",
+                        });
+                        resetForm();
+                    } else {
+                        showNotification({
+                            title: "Error desde el servidor",
+                            message: res.message || "Ocurrio un error al intentar crear el usuario",
+                            type: "danger",
+                        });
+                    }
+                });
+            }}
         >
             {({ setFieldValue, handleSubmit, errors, touched }) => (
                 <form
@@ -158,13 +185,35 @@ function Form() {
                             text="Email"
                             placeholder="Escriba su correo electronico"
                         />
+                        <InputPassword
+                            name="password"
+                            error={errors.password}
+                            touched={touched.password}
+                            text="Contraseña"
+                            placeholder="Escriba su contraseña"
+                        />
+                        <InputPassword
+                            name="confirmPassword"
+                            error={errors.confirmPassword}
+                            touched={touched.confirmPassword}
+                            text="Confirmar Contraseña"
+                            placeholder="Confirme su contraseña"
+                        />
                     </div>
 
                     <Button
-                        text="Guardar"
                         tag="button"
                         type="submit"
-                        classNameWrapper="w-full items-center bg-[--c6-bg] text-[--c6-txt] border-0 hover:bg-white justify-center"
+                        text={!isLoading ? "Registrarse" : ""}
+                        icon={isLoading ? faSpinner : ""}
+                        classNameIcon="animate-spin text-sm"
+                        classNameWrapper={cls(
+                            "w-full h-10 items-center bg-[--c6-bg] text-[--c6-txt] border-0 hover:bg-white justify-center",
+                            {
+                                "text-black/80 hover:text-black/80 bg-gray-300 hover:bg-gray-300":
+                                    isLoading,
+                            }
+                        )}
                     />
                 </form>
             )}
@@ -193,6 +242,48 @@ function Input({
         <div className={classWrapper}>
             <span>{text}</span>
             <Field name={name} placeholder={placeholder} as={type} className={classInput} />
+            <Error name={name} />
+        </div>
+    );
+}
+
+function InputPassword({
+    name,
+    text,
+    error,
+    touched,
+    placeholder,
+    classNameWrapper = "",
+    classNameInput = "",
+}) {
+    const [isShow, setIsShow] = useState(false);
+    const classWrapper = cls("w-full bg-transparent text-[--c1-txt]", classNameWrapper);
+    const classInput = cls(
+        "not-italic placeholder-shown:italic py-2 w-full border-solid border-b border-gray-400 bg-transparent text-[--c1-txt] ",
+        classNameInput,
+        { "border-red-500": error && touched }
+    );
+    return (
+        <div className={classWrapper}>
+            <span>{text}</span>
+            <div className={cls("flex", classInput)}>
+                <Field
+                    type={isShow ? "text" : "password"}
+                    className={cls(classInput, "border-0 w-full p-0")}
+                    name={name}
+                    placeholder={placeholder}
+                />
+                <button
+                    className="w-8 ml-2 opacity-50 hover:opacity-100 transition-all duration-200"
+                    onClick={() => setIsShow(!isShow)}
+                    type="button"
+                >
+                    <FontAwesomeIcon
+                        icon={!isShow ? faEye : faEyeSlash}
+                        className="text-[--c1-txt]"
+                    />
+                </button>
+            </div>
             <Error name={name} />
         </div>
     );

@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { isValidateRequired, resetForm, setValuesForm } from "../utils/validations";
 import * as validator from "../utils/validations";
-import { showNotification } from "../panel.components/Notification";
+import { showNotification } from "../component/Notification";
 
 export default function useCrudPanel({
     entityName,

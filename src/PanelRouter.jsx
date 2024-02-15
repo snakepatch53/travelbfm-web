@@ -2,17 +2,19 @@ import "./RouterPanel.css";
 
 import { Route, Routes } from "react-router-dom";
 import Header from "./panel.components/Header";
-import { Notification } from "./panel.components/Notification";
-import { useState } from "react";
+import { lazy, useContext, useState } from "react";
 import Sidebar from "./panel.components/Sidebar";
-import Home from "./panel.pages/Home";
-import Users from "./panel.pages/Users";
 import CrudProgress from "./panel.components/CrudProgress";
-import Slider from "./panel.pages/Slider";
+import { logout } from "./services/users";
+import { SessionContext } from "./context/session";
 
-// const Home = lazy(() => import("./landing.pages/Home"));
+const Home = lazy(() => import("./panel.pages/Home"));
+const Users = lazy(() => import("./panel.pages/Users"));
+const Slider = lazy(() => import("./panel.pages/Slider"));
 
-export default function PanelRouter({ info, session, updateSession }) {
+export default function PanelRouter({ info }) {
+    const { session, removeSession } = useContext(SessionContext);
+
     const [showSidebar, setShowSidebar] = useState("open");
     const [progress, setProgress] = useState(false);
     const handleClickShowSidebar = () => {
@@ -21,15 +23,11 @@ export default function PanelRouter({ info, session, updateSession }) {
 
     function handleLogout() {
         setProgress(true);
-        // logout().then(() => {
-        //     window.localStorage.removeItem("session");
-        //     window.location.href = "/";
-        // });
+        logout().then(() => removeSession());
     }
     return (
         <>
             <div className="panel-page">
-                <Notification />
                 <div className={"panel-page-state " + showSidebar}></div>
                 <Header
                     info={info}
@@ -41,10 +39,7 @@ export default function PanelRouter({ info, session, updateSession }) {
                     <Sidebar session={session} />
                     <div className="panel-page-page scroll-style relative">
                         <Routes>
-                            <Route
-                                path="/"
-                                element={<Home session={session} updateSession={updateSession} />}
-                            />
+                            <Route path="/" element={<Home session={session} />} />
                             <Route path="/users" element={<Users session={session} />} />
                             <Route path="/slider" element={<Slider session={session} />} />
                         </Routes>

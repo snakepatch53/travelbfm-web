@@ -17,7 +17,7 @@
     width: 100%;
 
     background: rgba(0, 0, 0, 0.1);
-    border-top: solid 3px var(--color1-bg);
+    border-top: solid 3px var(--c6-bg);
     border-radius: 3px;
     box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.3);
 }

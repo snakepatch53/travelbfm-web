@@ -1,3 +1,4 @@
+import "react-notifications-component/dist/theme.css";
 import { ReactNotifications, Store } from "react-notifications-component";
 
 export function Notification() {
