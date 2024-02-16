@@ -1,0 +1,1 @@
+import{j as s}from"./index-tVVHshlL.js";function a({src:l="/image/food1.jpg"}){return s.jsxs("div",{className:"fixed inset-0 w-full h-full",children:[s.jsx("img",{src:l,className:"w-full h-full object-cover"}),s.jsx("div",{className:"absolute inset-0 bg-black/50 backdrop-blur-sm"})]})}export{a as C};

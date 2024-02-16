@@ -26,7 +26,7 @@ export function CrudForm({
     // };
 
     return (
-        <section className={"panel-crudform-component " + (isOpen ? "open" : "")}>
+        <section className={"relative z-10 panel-crudform-component " + (isOpen ? "open" : "")}>
             <form className="ideaform" onSubmit={onSubmit} ref={formRef} noValidate>
                 <div className="head">
                     <h3>{title}</h3>
@@ -107,7 +107,7 @@ function InputForm({ radioOptions = [], ...props }) {
         {
             type: "password",
             Component: () => {
-                const [showPass, setShowPass] = useState(false);
+                const [showPass, setShowPass] = useState(true);
                 const handleShowPass = () => {
                     setShowPass(!showPass);
                 };

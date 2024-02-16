@@ -88,12 +88,12 @@ img {
 }
 
 .scroll-style::-webkit-scrollbar-thumb {
-    background: var(--color1-bg);
+    background: var(--c6-bg);
     border-radius: 4px;
 }
 
 .scroll-style::-webkit-scrollbar-thumb:hover {
-    background: var(--color1-bg);
+    background: var(--c6-bg);
     box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.2);
 }
 

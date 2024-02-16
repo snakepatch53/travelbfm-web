@@ -1,3 +1,4 @@
+import { cls } from "../utils/utils";
 import "./CrudTable.css";
 import CrudTableSkeleton from "./CrudTableSkeleton";
 
@@ -8,9 +9,14 @@ export function CrudTable({
     onRowPrint,
     actionsNum = 2,
     actionText = "Acción",
+    classWrapper = "",
 }) {
     return (
-        <section className={"panel-crudtable-component " + (isOpen ? "open" : "")}>
+        <section
+            className={cls("relative z-10 panel-crudtable-component", classWrapper, {
+                open: isOpen,
+            })}
+        >
             <div className="content_table ideatable scroll-style">
                 <table border="1">
                     <thead>

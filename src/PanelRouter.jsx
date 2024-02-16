@@ -7,13 +7,18 @@ import Sidebar from "./panel.components/Sidebar";
 import CrudProgress from "./panel.components/CrudProgress";
 import { logout } from "./services/users";
 import { SessionContext } from "./context/session";
+import { ShopCartProvider } from "./context/shop-cart";
 
 const Home = lazy(() => import("./panel.pages/Home"));
+const Profile = lazy(() => import("./panel.pages/Profile"));
 const Users = lazy(() => import("./panel.pages/Users"));
-const Slider = lazy(() => import("./panel.pages/Slider"));
+const Business = lazy(() => import("./panel.pages/Business"));
+const Categories = lazy(() => import("./panel.pages/Categories"));
+const Products = lazy(() => import("./panel.pages/Products"));
+const Shop = lazy(() => import("./panel.pages/Shop"));
 
 export default function PanelRouter({ info }) {
-    const { session, removeSession } = useContext(SessionContext);
+    const { removeSession } = useContext(SessionContext);
 
     const [showSidebar, setShowSidebar] = useState("open");
     const [progress, setProgress] = useState(false);
@@ -26,7 +31,7 @@ export default function PanelRouter({ info }) {
         logout().then(() => removeSession());
     }
     return (
-        <>
+        <ShopCartProvider>
             <div className="panel-page">
                 <div className={"panel-page-state " + showSidebar}></div>
                 <Header
@@ -36,17 +41,21 @@ export default function PanelRouter({ info }) {
                 />
 
                 <div className="panel-page-content">
-                    <Sidebar session={session} />
+                    <Sidebar />
                     <div className="panel-page-page scroll-style relative">
                         <Routes>
-                            <Route path="/" element={<Home session={session} />} />
-                            <Route path="/users" element={<Users session={session} />} />
-                            <Route path="/slider" element={<Slider session={session} />} />
+                            <Route path="/" element={<Home />} />
+                            <Route path="/users" element={<Users />} />
+                            <Route path="/profile" element={<Profile />} />
+                            <Route path="/business" element={<Business />} />
+                            <Route path="/categories" element={<Categories />} />
+                            <Route path="/products" element={<Products />} />
+                            <Route path="/shop" element={<Shop />} />
                         </Routes>
                     </div>
                 </div>
             </div>
             <CrudProgress isOpen={progress} text="Cerrando sesion..." />
-        </>
+        </ShopCartProvider>
     );
 }

@@ -23,7 +23,6 @@ export async function fetchAdapter({
     headers.append("Accept", "application/json");
     headers.append("Authorization", sessionToken ? `Bearer ${sessionToken}` : "");
     if (!formData) headers.append("Content-Type", "application/json");
-
     const response = await fetch(_API_URL + resource, {
         method,
         headers,

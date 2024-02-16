@@ -5,6 +5,7 @@ import { showNotification } from "../component/Notification";
 
 export default function useCrudPanel({
     entityName,
+    pluralEntityName,
     excludeFieldsValidationEdit = [],
     extraValidations = () => true,
     isStorageMultipartFormData = false,
@@ -58,6 +59,7 @@ export default function useCrudPanel({
     const $form = useRef(null);
 
     useEffect(() => {
+        if (!crudGet) return setDatalist([]);
         crudGet().then((res) => setDatalist(res));
     }, [crudGet]);
 
@@ -67,11 +69,13 @@ export default function useCrudPanel({
         // search can be a object "teacher.name" or "name" etc
         const filter = datalist.filter((item) => {
             let isMatch = false;
+
             for (const field of searchFields) {
+                const value = item[field] ? item[field].toString().toLowerCase() : "";
                 if (field.includes(".")) {
                     const [object, key] = field.split(".");
                     if (item[object][key]?.toLowerCase()?.includes(search)) isMatch = true;
-                } else if (item[field]?.toLowerCase()?.includes(search)) isMatch = true;
+                } else if (value?.toLowerCase()?.includes(search)) isMatch = true;
             }
             return isMatch;
         });
@@ -209,6 +213,8 @@ export default function useCrudPanel({
     }
 
     return {
+        entityName,
+        pluralEntityName,
         head,
         table,
         form,

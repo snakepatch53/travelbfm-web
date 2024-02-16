@@ -11,7 +11,7 @@ function mapNames(data) {
 export async function getUsers() {
     const response = await fetchAdapter({
         resource,
-        printResponse: true,
+        //printResponse: true,
     });
     return mapNames(response);
 }
@@ -30,6 +30,18 @@ export async function storageUser({ data }) {
 export async function updateUser({ id, data }) {
     const response = await fetchAdapter({
         resource: resource + "/" + id,
+        data,
+        method: "POST",
+        all: true,
+        formData: true,
+        // printResponse: true,
+    });
+    return response;
+}
+
+export async function updateProfile({ data }) {
+    const response = await fetchAdapter({
+        resource: "update-logued",
         data,
         method: "POST",
         all: true,

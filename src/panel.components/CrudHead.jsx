@@ -13,7 +13,7 @@ export default function CrudHead({
 }) {
     return (
         <section
-            className="grid gap-4 grid-cols-1 md:grid-cols-4 lg:grid-cols-3 bg-[--c3-bg] rounded-sm border-solid border-t-[3px] border-[var(--c3-txt3)] shadow-[0_2px_5px_0_rgba(0,0,0,0.3)]"
+            className="relative z-10 grid gap-4 grid-cols-1 md:grid-cols-4 lg:grid-cols-3 bg-[--c3-bg] rounded-sm border-solid border-t-[3px] border-[var(--c3-txt3)] shadow-[0_2px_5px_0_rgba(0,0,0,0.3)]"
             style={{
                 margin: isOpen ? "0" : "0",
                 padding: isOpen ? "10px" : "0",

@@ -14,9 +14,10 @@ import "react-notifications-component/dist/theme.css";
 import { destroyUser, getUsers, storageUser, updateUser } from "../services/users";
 import useCrudPanel from "../hooks/useCrudPanel";
 import PageContent from "../component/PageContent";
+import CrudBackground from "../panel.components/CrudBackground";
 
 export default function Users() {
-    const extraValidations = ($form, showNotification, { isEmail, isCedula }) => {
+    const extraValidations = ($form, showNotification, { isEmail }) => {
         let validate = true;
         if ($form.password?.value && $form.password?.value?.length < 8) {
             showNotification("La contraseña debe tener minimo 8 caracteres");
@@ -26,22 +27,17 @@ export default function Users() {
             showNotification("La foto debe pesar maximo 2MB");
             validate = false;
         }
-        if ($form.signature?.files?.length && $form.signature?.files[0]?.size > 2000000) {
-            showNotification("La firma debe pesar maximo 2MB");
-            validate = false;
-        }
         if (!isEmail($form.email?.value)) {
             showNotification("El correo electronico no es valido");
             validate = false;
         }
-        if (!isCedula($form.dni?.value)) {
-            showNotification("La cedula no es valida");
-            validate = false;
-        }
+
         return validate;
     };
 
     const {
+        entityName,
+        pluralEntityName,
         head,
         table,
         form,
@@ -58,9 +54,10 @@ export default function Users() {
         searchValue,
         searchOnChange,
     } = useCrudPanel({
-        entityName: "Entidad",
-        excludeFieldsValidationEdit: ["password", "photo", "signature"],
-        searchFields: ["name", "lastname", "dni", "email", "role"],
+        entityName: "Usuario",
+        pluralEntityName: "Usuarios",
+        excludeFieldsValidationEdit: ["password", "photo"],
+        searchFields: ["name", "lastname", "email", "role"],
         extraValidations,
         isStorageMultipartFormData: true,
         isUpdateMultipartFormData: true,
@@ -72,8 +69,9 @@ export default function Users() {
 
     return (
         <PageContent className="flex flex-col gap-7 w-full">
+            <CrudBackground />
             <CrudHead
-                title="Usuarios"
+                title={pluralEntityName}
                 icon={faUsers}
                 isOpen={head}
                 onClickNew={handleModeNew}
@@ -111,7 +109,7 @@ export default function Users() {
             />
 
             <CrudForm
-                title="Usuario"
+                title={entityName}
                 isOpen={form}
                 onClickCancel={hanleCancel}
                 onSubmit={handleSubmit}
@@ -130,14 +128,18 @@ export default function Users() {
                     name="lastname"
                     required
                 />
-
                 <CrudFormInput
-                    label="Cedula "
-                    placeholder="Escriba el de cedula"
-                    name="dni"
+                    label="Celular"
+                    placeholder="Escriba su numero de celular"
+                    name="phone"
                     required
                 />
-
+                <CrudFormInput
+                    label="Direccion"
+                    placeholder="Escriba una direccion"
+                    name="address"
+                    required
+                />
                 <CrudFormInput
                     label="Correo Electronico"
                     placeholder="Escriba el correo electronico"
@@ -153,36 +155,26 @@ export default function Users() {
                 />
                 <CrudFormInput
                     name="role"
-                    label="Provilegios"
+                    label="Privilegios"
                     type="radio"
                     radioOptions={[
-                        { value: "Administrador", label: "Administrador" },
-                        { value: "Responsable", label: "Responsable" },
-                        { value: "Profesor", label: "Profesor", checked: true },
+                        { value: "Administrador", label: "Administrador", checked: true },
+                        { value: "Vendedor", label: "Vendedor" },
+                        { value: "Cliente", label: "Cliente" },
                     ]}
                     required
                 />
                 <CrudFormInput
-                    label="Facebook"
-                    placeholder="Ingrese el Link de Facebook"
-                    name="facebook"
+                    name="state"
+                    label="Estado"
+                    type="radio"
+                    radioOptions={[
+                        { value: "Activo", label: "Activo", checked: true },
+                        { value: "Inactivo", label: "Inactivo" },
+                    ]}
                     required
                 />
-                <CrudFormInput
-                    label="Descripcion"
-                    placeholder="Escriba la descripción"
-                    name="description"
-                    type="textarea"
-                    required
-                />
-                <CrudFormInput label="Foto" name="photo" type="file" required />
-                <CrudFormInput
-                    label="Firma"
-                    type="file"
-                    name="signature"
-                    accept="image/png"
-                    required
-                />
+                <CrudFormInput label="Foto" name="photo" type="file" />
             </CrudForm>
 
             <CrudConfirm
