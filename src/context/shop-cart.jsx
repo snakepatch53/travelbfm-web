@@ -1,4 +1,5 @@
 import { createContext, useEffect, useState } from "react";
+import { showNotification } from "../component/Notification";
 
 // 1. Crear el contexto
 export const ShopCartContext = createContext();
@@ -7,6 +8,17 @@ export const ShopCartContext = createContext();
 export function ShopCartProvider({ children }) {
     const [shopCart, setShopCart] = useState([]);
     const addProduct = (product) => {
+        // no se puede comprar de distintos negocios
+        if (
+            shopCart?.length > 0 &&
+            shopCart[0]?.category?.business?.id != product?.category?.business?.id
+        ) {
+            return showNotification({
+                title: "No se puede comprar",
+                message: "No se puede comprar de distintos negocios",
+                type: "warning",
+            });
+        }
         const exist = shopCart.find((item) => item.id == product.id);
         if (exist) {
             setShopCart(
@@ -40,6 +52,11 @@ export function ShopCartProvider({ children }) {
         } else {
             window.localStorage.setItem("shopCart", JSON.stringify([{ ...product, quantity: 1 }]));
         }
+        showNotification({
+            title: "Producto agregado",
+            message: "Producto agregado al carrito",
+            type: "success",
+        });
     };
 
     const removeProduct = (product) => {

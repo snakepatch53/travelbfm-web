@@ -1,14 +1,18 @@
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, EffectFade } from "swiper/modules";
 import "swiper/css";
-
-import partners from "../mook/partners.json";
-import PartnerItem from "./PartnerItem";
+import { InfoContext } from "../context/info";
+import { useContext } from "react";
+import PartnerItem, { SkullItem } from "./PartnerItem";
 import Title from "./Title";
+
 export default function Partners() {
+    const { businesses } = useContext(InfoContext);
+
     return (
         <div className="relative flex flex-col gap-20 ">
             <Title text="Nuestros Asociados" dark big />
+
             <Swiper
                 className="w-full h-full"
                 modules={[Autoplay, EffectFade]}
@@ -26,14 +30,15 @@ export default function Partners() {
                     1280: { slidesPerView: 5 },
                 }}
             >
-                {partners.map((item) => (
+                {businesses?.map((item) => (
                     <SwiperSlide key={item.id} className="relative w-full h-full">
                         <PartnerItem
-                            img={item.img}
-                            title={item.title}
-                            text={item.subtitle}
+                            img={item.logo_url}
+                            title={item.name}
+                            text={item.description}
                             href={item.link}
-                            tag="a"
+                            tag="link"
+                            to="/business"
                             classNameWrapper="group"
                             classNameImg="group-hover:scale-100 object-contain"
                             classNameTitle="group-hover:underline"
@@ -41,6 +46,15 @@ export default function Partners() {
                         />
                     </SwiperSlide>
                 ))}
+                {!businesses && (
+                    <>
+                        <SkullItem />
+                        <SkullItem />
+                        <SkullItem />
+                        <SkullItem />
+                        <SkullItem />
+                    </>
+                )}
             </Swiper>
         </div>
     );

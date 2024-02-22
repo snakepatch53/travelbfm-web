@@ -81,3 +81,16 @@ function ItemContent({
         </>
     );
 }
+
+export function SkullItem() {
+    return (
+        <div className="flex flex-col bg-black/15 p-5 items-center gap-5 rounded-xl animate-pulse">
+            <div className="w-full aspect-video  overflow-hidden bg-black/15 rounded-md" />
+            <div className="w-40 h-5 bg-black/15 rounded-full" />
+            <div className="flex flex-col w-full items-center gap-2">
+                <div className="w-48 h-3 bg-black/15 rounded-full" />
+                <div className="w-48 h-3 bg-black/15 rounded-full" />
+            </div>
+        </div>
+    );
+}

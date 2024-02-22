@@ -3,9 +3,12 @@ import App from "./App.jsx";
 import "./index.css";
 import "./theme.css";
 import { SessionProvider } from "./context/session.jsx";
+import { InfoProvider } from "./context/info.jsx";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-    <SessionProvider>
-        <App />
-    </SessionProvider>
+    <InfoProvider>
+        <SessionProvider>
+            <App />
+        </SessionProvider>
+    </InfoProvider>
 );

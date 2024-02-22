@@ -30,7 +30,9 @@ export default function Home({ info }) {
                     <path d="M0,224L120,229.3C240,235,480,245,720,208C960,171,1200,85,1320,42.7L1440,0L1440,320L1320,320C1200,320,960,320,720,320C480,320,240,320,120,320L0,320Z" />
                 </svg>
                 <div className="px-[--pdd] pb-32 pt-16">
-                    <Partners />
+                    <div className="container">
+                        <Partners />
+                    </div>
                 </div>
             </section>
             <section className=" px-[--pdd] py-20">

@@ -2,7 +2,7 @@ import PageContent from "../component/PageContent";
 
 export default function Loading() {
     return (
-        <PageContent className="flex justify-center items-center h-screen px-[--padding] bg-gray-200">
+        <PageContent className="flex justify-center items-center h-screen w-full px-[--padding]">
             <div className="container flex flex-col justify-center items-center gap-2">
                 <svg viewBox="0 0 38 38" className="max-w-14">
                     <defs>

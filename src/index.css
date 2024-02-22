@@ -82,6 +82,9 @@ img {
 }
 
 /* _____________ SCROLL _ STYLES ________________ */
+.scroll-style {
+    scroll-behavior: smooth;
+}
 .scroll-style::-webkit-scrollbar {
     width: 7px;
     height: 5px;

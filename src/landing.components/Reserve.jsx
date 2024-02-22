@@ -15,7 +15,7 @@ export default function Reserve() {
                 <Title text="Reserva Ahora" dark big />
                 <Button
                     text="Reservar"
-                    to="/business"
+                    to="/login"
                     classNameWrapper="border-[white] text-[white] hover:bg-white"
                 />
             </div>

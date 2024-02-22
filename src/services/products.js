@@ -24,6 +24,14 @@ export async function getProductsWithCategory() {
     return mapNames(response);
 }
 
+export async function getProductsWithCategoryAndBusiness() {
+    const response = await fetchAdapter({
+        resource: resource + "?includeCategory=true&includeBusiness=true",
+        // printResponse: true,
+    });
+    return mapNames(response);
+}
+
 export async function storageProduct({ data }) {
     const response = await fetchAdapter({
         resource,
