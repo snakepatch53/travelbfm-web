@@ -32,7 +32,7 @@ export async function createBulkCart({ data }) {
         data,
         method: "POST",
         all: true,
-        printResponse: true,
+        // printResponse: true,
     });
     return response;
 }
