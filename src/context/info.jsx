@@ -1,6 +1,8 @@
 import { createContext, useEffect, useState } from "react";
 import { getInfo } from "../services/info";
 
+import informacion from "./../mook/info.json";
+
 // 1. Crear el contexto
 export const InfoContext = createContext();
 
@@ -19,6 +21,7 @@ export function InfoProvider({ children }) {
     return (
         <InfoContext.Provider
             value={{
+                info: informacion || null,
                 users: users || null,
                 businesses: businesses || null,
                 categories: categories || null,

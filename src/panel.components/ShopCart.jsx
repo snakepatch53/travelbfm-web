@@ -13,11 +13,14 @@ import Button from "./Button";
 import { SessionContext } from "../context/session";
 import { createBulkCart } from "../services/carts";
 import { showNotification } from "../component/Notification";
+import { InfoContext } from "../context/info";
 
 export default function ShopCart() {
     const { session } = useContext(SessionContext);
     const { shopCart, removeProduct, addQuantity, removeQuantity, clearShopCart } =
         useContext(ShopCartContext);
+
+    const { info } = useContext(InfoContext);
     const [isOpen, setIsOpen] = useState(false);
     const shopRef = useRef();
     // document.addEventListener("click", (e) => {
@@ -48,7 +51,6 @@ export default function ShopCart() {
             location: "123456",
         };
         createBulkCart({ data }).then((res) => {
-            console.log(res);
             setIsLoad(false);
             if (res?.success) {
                 showNotification({
@@ -57,6 +59,11 @@ export default function ShopCart() {
                     type: "success",
                 });
                 clearShopCart();
+                // open pdf from response in new tab
+                const wtp_message = `Hola 👋, me contacto desde su pagina web 💻: travelvfb.com\n\n*Nombre:* ${session.name}\n*Asunto:* Gestion de carrito de compras 🎉\n*Url:* ${res?.data?.pdf_url}`;
+                const url = `https://api.whatsapp.com/send?phone=${info.whatsapp.trim()}&text=${wtp_message}`;
+                const encodedUrl = encodeURI(url);
+                window.open(encodedUrl, "_blank");
             } else {
                 showNotification({
                     title: "Error",
