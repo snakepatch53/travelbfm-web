@@ -2,8 +2,11 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "./Header.css";
 import { faBars } from "@fortawesome/free-solid-svg-icons";
 import ShopCart from "./ShopCart";
+import { useContext } from "react";
+import { SessionContext } from "../context/session";
 
-export default function Header({ info, onClickButtonBars, onLogout }) {
+export default function Header({ info, onClickButtonBars }) {
+    const { logout } = useContext(SessionContext);
     return (
         <>
             <div
@@ -29,7 +32,7 @@ export default function Header({ info, onClickButtonBars, onLogout }) {
                 <div className="flex ml-auto mr-2 h-full">
                     <button
                         className="block px-4 whitespace-nowrap text-[--c6-txt] text-sm tracking-wide hover:underline hover:bg-transparent"
-                        onClick={onLogout}
+                        onClick={logout}
                     >
                         Cerrar sesion
                     </button>

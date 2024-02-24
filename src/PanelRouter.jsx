@@ -5,7 +5,6 @@ import Header from "./panel.components/Header";
 import { Suspense, lazy, useContext, useState } from "react";
 import Sidebar from "./panel.components/Sidebar";
 import CrudProgress from "./panel.components/CrudProgress";
-import { logout } from "./services/users";
 import { SessionContext } from "./context/session";
 import { ShopCartProvider } from "./context/shop-cart";
 import Loading from "./pages/Loading";
@@ -19,27 +18,18 @@ const Products = lazy(() => import("./panel.pages/Products"));
 const Shop = lazy(() => import("./panel.pages/Shop"));
 
 export default function PanelRouter({ info }) {
-    const { removeSession } = useContext(SessionContext);
+    const { progress } = useContext(SessionContext);
 
     const [showSidebar, setShowSidebar] = useState("open");
-    const [progress, setProgress] = useState(false);
     const handleClickShowSidebar = () => {
         setShowSidebar(showSidebar == "open" ? "close" : "open");
     };
 
-    function handleLogout() {
-        setProgress(true);
-        logout().then(() => removeSession());
-    }
     return (
         <ShopCartProvider>
             <div className="panel-page">
                 <div className={"panel-page-state " + showSidebar}></div>
-                <Header
-                    info={info}
-                    onClickButtonBars={handleClickShowSidebar}
-                    onLogout={handleLogout}
-                />
+                <Header info={info} onClickButtonBars={handleClickShowSidebar} />
 
                 <div className="panel-page-content">
                     <Sidebar />

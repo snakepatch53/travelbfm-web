@@ -6,9 +6,9 @@ import { SessionProvider } from "./context/session.jsx";
 import { InfoProvider } from "./context/info.jsx";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-    <InfoProvider>
-        <SessionProvider>
+    <SessionProvider>
+        <InfoProvider>
             <App />
-        </SessionProvider>
-    </InfoProvider>
+        </InfoProvider>
+    </SessionProvider>
 );

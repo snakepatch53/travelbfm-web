@@ -103,3 +103,13 @@ export async function logout() {
     });
     return response;
 }
+
+export async function existSession() {
+    const response = await fetchAdapter({
+        resource: "exist-session",
+        method: "POST",
+        all: true,
+        // printResponse: true,
+    });
+    return response;
+}

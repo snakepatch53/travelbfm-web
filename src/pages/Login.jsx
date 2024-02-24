@@ -4,8 +4,7 @@ import { cls } from "../utils/utils";
 import { ErrorMessage, Field, Formik } from "formik";
 import * as Yup from "yup";
 import { showNotification } from "../component/Notification";
-import { useContext, useState } from "react";
-import { login } from "../services/users";
+import { useContext } from "react";
 import { faSpinner } from "@fortawesome/free-solid-svg-icons";
 import { SessionContext } from "../context/session";
 
@@ -45,8 +44,7 @@ export default function Login({ info }) {
     );
 }
 function Form() {
-    const [isLoading, setIsLoading] = useState(false);
-    const { updateSession } = useContext(SessionContext);
+    const { progress, login } = useContext(SessionContext);
     return (
         <Formik
             validationSchema={Yup.object({
@@ -58,24 +56,19 @@ function Form() {
                 password: "",
             }}
             onSubmit={(values, { resetForm }) => {
-                setIsLoading(true);
-                login({ data: values }).then((res) => {
-                    setIsLoading(false);
-                    if (res?.success) {
-                        updateSession(res.data);
-                        showNotification({
-                            title: "Exito",
-                            message: "Te has logueado correctamente",
-                            type: "success",
+                login(values).then((res) => {
+                    if (!res?.success)
+                        return showNotification({
+                            title: "Cancelado",
+                            message: res?.message || "Error al iniciar sesion",
+                            type: "warning",
                         });
-                        resetForm();
-                    } else {
-                        showNotification({
-                            title: "Error desde el servidor",
-                            message: res.message || "Ocurrio un error al intentar loguearte",
-                            type: "danger",
-                        });
-                    }
+                    resetForm();
+                    showNotification({
+                        title: "Sesión iniciada",
+                        message: "Bienvenido",
+                        type: "success",
+                    });
                 });
             }}
         >
@@ -86,14 +79,14 @@ function Form() {
                     <Button
                         tag="button"
                         type="submit"
-                        text={!isLoading ? "Iniciar Sesión" : ""}
-                        icon={isLoading ? faSpinner : ""}
+                        text={!progress ? "Iniciar Sesión" : ""}
+                        icon={progress ? faSpinner : ""}
                         classNameIcon="animate-spin text-sm"
                         classNameWrapper={cls(
                             "w-full h-10 items-center bg-[--c6-bg] text-[--c6-txt] border-0 hover:bg-white justify-center mt-4",
                             {
                                 "text-black/80 hover:text-black/80 bg-gray-300 hover:bg-gray-300":
-                                    isLoading,
+                                    progress,
                             }
                         )}
                     />
