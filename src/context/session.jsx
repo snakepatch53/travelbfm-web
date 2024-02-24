@@ -16,6 +16,7 @@ export function SessionProvider({ children }) {
     const removeSession = () => {
         setSession([]);
         window.localStorage.removeItem("session");
+        window.localStorage.removeItem("shopCart");
     };
 
     const _logout = () => {

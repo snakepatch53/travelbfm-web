@@ -11,6 +11,7 @@ import Loading from "./pages/Loading";
 import NotFound from "./component/NotFound";
 import AdminGuard from "./guards/AdminGuard";
 import SellerGuard from "./guards/SellerGuard";
+import Orders from "./panel.pages/Orders";
 
 const Home = lazy(() => import("./panel.pages/Home"));
 const Profile = lazy(() => import("./panel.pages/Profile"));
@@ -43,6 +44,7 @@ export default function PanelRouter({ info }) {
                                 <Route path="/profile" element={<Profile />} />
                                 <Route path="/shop" element={<Shop />} />
                                 <Route path="/shop/:business_id" element={<Shop />} />
+                                <Route path="/orders" element={<Orders />} />
                                 <Route element={<AdminGuard />}>
                                     <Route path="/users" element={<Users />} />
                                     <Route path="/business" element={<Business />} />

@@ -58,6 +58,7 @@ export default function ShopCart() {
                     message: "Compra realizada con exito",
                     type: "success",
                 });
+                setIsOpen(false);
                 clearShopCart();
                 // open pdf from response in new tab
                 const wtp_message = `Hola 👋, me contacto desde su pagina web 💻: travelvfb.com\n\n*Nombre:* ${session.name}\n*Asunto:* Gestion de carrito de compras 🎉\n*Url:* ${res?.data?.pdf_url}`;

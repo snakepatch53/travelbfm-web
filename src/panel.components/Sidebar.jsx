@@ -2,6 +2,7 @@ import "./Sidebar.css";
 
 import {
     faBagShopping,
+    faCartShopping,
     faHome,
     faLayerGroup,
     faStore,
@@ -28,8 +29,9 @@ export default function Sidebar() {
             <span className="text-[var(--color4-txt)]">{session.name}</span>
             <span className="user_name">{session.role}</span>
             <Option name="Inicio" icon={faHome} to="./" />
-            <Option name="Tienda" icon={faBagShopping} to="./shop" />
             <Option name="Perfil" icon={faUser} to="./profile" />
+            <Option name="Tienda" icon={faBagShopping} to="./shop" />
+            <Option name="Pedidos" icon={faCartShopping} to="./orders" />
             <AdminOptions>
                 <Option name="Usuarios" icon={faUsers} to="./users" />
                 <Option name="Negocios" icon={faStore} to="./business" />
