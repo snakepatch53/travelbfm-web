@@ -1,9 +1,11 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { getCategories } from "../services/categories";
-import { getProductsWithCategoryAndBusiness } from "../services/products";
+// import { getCategories } from "../services/categories";
+// import { getProductsWithCategoryAndBusiness } from "../services/products";
+import { InfoContext } from "../context/info";
 
 export default function useShop() {
+    const { categories: _categories, products: _products } = useContext(InfoContext);
     const { business_id } = useParams();
     const [products, setProducts] = useState(null);
     const [productFilter, setProductFilter] = useState(null);
@@ -11,17 +13,24 @@ export default function useShop() {
     const [categorySelected, setCategorySelected] = useState(0);
     useEffect(() => {
         if (!business_id) {
-            getProductsWithCategoryAndBusiness().then((data) => setProducts(data));
-            getCategories().then((data) => setCategories(data));
-        } else {
-            getProductsWithCategoryAndBusiness().then((data) => {
-                setProducts(data?.filter((item) => item.category?.business_id == business_id));
-            });
-            getCategories().then((data) => {
-                setCategories(data?.filter((item) => item.business_id == business_id));
-            });
+            setProducts(_products);
+            setCategories(_categories);
+            return;
         }
-    }, [business_id]);
+        setProducts(_products?.filter((item) => item.category?.business_id == business_id));
+        setCategories(_categories?.filter((item) => item.business_id == business_id));
+        // if (!business_id) {
+        // getProductsWithCategoryAndBusiness().then((data) => setProducts(data));
+        // getCategories().then((data) => setCategories(data));
+        // } else {
+        // getProductsWithCategoryAndBusiness().then((data) => {
+        //     setProducts(data?.filter((item) => item.category?.business_id == business_id));
+        // });
+        // getCategories().then((data) => {
+        //     setCategories(data?.filter((item) => item.business_id == business_id));
+        // });
+        // }
+    }, [business_id, _products, _categories]);
 
     useEffect(() => {
         if (categorySelected == 0) {

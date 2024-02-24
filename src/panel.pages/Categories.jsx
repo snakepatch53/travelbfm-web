@@ -121,12 +121,7 @@ export default function Categories() {
                     name="name"
                     required
                 />
-                <CrudFormInput
-                    label="Icono"
-                    placeholder="Selecione un icono "
-                    name="icon"
-                    required
-                />
+                <CrudFormInput label="Icono" placeholder="Selecione un icono " name="icon" />
                 <CrudFormInput
                     label="Descripcion"
                     placeholder="Escriba una descripcion"

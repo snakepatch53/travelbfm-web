@@ -26,7 +26,7 @@ export async function getCategoriesWithBusiness() {
 
 export async function storageCategory({ data }) {
     const response = await fetchAdapter({
-        resource,
+        resource: resource + "?includeBusiness=true",
         data,
         method: "POST",
         all: true,
@@ -35,7 +35,6 @@ export async function storageCategory({ data }) {
 }
 
 export async function updateCategory({ id, data }) {
-    console.log(data);
     const response = await fetchAdapter({
         resource: resource + "/" + id + "?includeBusiness=true",
         data,

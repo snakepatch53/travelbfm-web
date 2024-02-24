@@ -2,7 +2,6 @@ import "./Sidebar.css";
 
 import {
     faBagShopping,
-    faBox,
     faHome,
     faLayerGroup,
     faStore,
@@ -11,8 +10,11 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { SessionContext } from "../context/session";
+import { AdminOptions } from "../guards/AdminGuard";
+import { SellerOptions } from "../guards/SellerGuard";
+import { cls } from "../utils/utils";
 
 export default function Sidebar() {
     const { session } = useContext(SessionContext);
@@ -25,41 +27,33 @@ export default function Sidebar() {
             />
             <span className="text-[var(--color4-txt)]">{session.name}</span>
             <span className="user_name">{session.role}</span>
-
-            <Link className="option" to="./">
-                <FontAwesomeIcon icon={faHome} />
-                <span>Inicio</span>
-            </Link>
-            <hr />
-            <Link className="option" to="./profile">
-                <FontAwesomeIcon icon={faUser} />
-                <span>Perfil</span>
-            </Link>
-            <hr />
-            <Link className="option" to="./users">
-                <FontAwesomeIcon icon={faUsers} />
-                <span>Usuarios</span>
-            </Link>
-            <hr />
-            <Link className="option" to="./business">
-                <FontAwesomeIcon icon={faStore} />
-                <span>Negocios</span>
-            </Link>
-            <hr />
-            <Link className="option" to="./categories">
-                <FontAwesomeIcon icon={faLayerGroup} />
-                <span>Categorias</span>
-            </Link>
-            <hr />
-            <Link className="option" to="./products">
-                <FontAwesomeIcon icon={faBox} />
-                <span>Productos</span>
-            </Link>
-            <hr />
-            <Link className="option" to="./shop">
-                <FontAwesomeIcon icon={faBagShopping} />
-                <span>Tienda</span>
-            </Link>
+            <Option name="Inicio" icon={faHome} to="./" />
+            <Option name="Tienda" icon={faBagShopping} to="./shop" />
+            <Option name="Perfil" icon={faUser} to="./profile" />
+            <AdminOptions>
+                <Option name="Usuarios" icon={faUsers} to="./users" />
+                <Option name="Negocios" icon={faStore} to="./business" />
+            </AdminOptions>
+            <SellerOptions>
+                <Option name="Categorias" icon={faLayerGroup} to="./categories" />
+            </SellerOptions>
         </div>
+    );
+}
+
+function Option({ name, icon, to }) {
+    const { pathname } = useLocation();
+    const pathnameWithoutPanel = pathname.replace("/panel", "");
+    const isActive = pathnameWithoutPanel === to.replace(".", "");
+    return (
+        <Link
+            className={cls("group option", {
+                "bg-black/20": isActive,
+            })}
+            to={to}
+        >
+            <FontAwesomeIcon icon={icon} />
+            <span>{name}</span>
+        </Link>
     );
 }

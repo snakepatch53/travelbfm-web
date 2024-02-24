@@ -46,8 +46,8 @@ export default function ShopCart() {
         }
         let data = {
             products: shopCart,
-            phone: session.phone,
-            address: session.address,
+            phone: session.phone || "undefined.",
+            address: session.address || "undefined.",
             location: "123456",
         };
         createBulkCart({ data }).then((res) => {
@@ -95,7 +95,7 @@ export default function ShopCart() {
                 <h1 className="font-title2 text-5xl text-center pt-4">Shop Cart</h1>
                 <table className="table-with-border-collapse w-full text-center mt-2">
                     <thead>
-                        <tr className="sticky top-0 bg-[--c4-bg]">
+                        <tr className="sticky z-10 top-0 bg-[--c4-bg]">
                             <th className="font-link py-3">Imagen</th>
                             <th className="font-link py-3">Producto</th>
                             <th className="font-link py-3">Precio</th>

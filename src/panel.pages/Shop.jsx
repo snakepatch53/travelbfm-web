@@ -99,16 +99,31 @@ function Item({ ...product }) {
             </div>
             <div className="flex-1 flex flex-col w-full pb-3 px-2">
                 <div className="flex flex-col w-full">
-                    <h3 className="block text-nowrap text-ellipsis overflow-hidden font-link text-lg text-center mt-2">
+                    <h3 className="block text-nowrap text-ellipsis overflow-hidden font-link text-lg text-center mt-2 select-text">
                         {product.name}
                     </h3>
                     {/* <span>{product.}</span> */}
-                    <p className="font-content text-sm text-center opacity-80 overflow-auto text-pretty">
+                    <p className="max-h-12 min-h-12 h-full font-content text-xs text-left opacity-80 overflow-hidden text-pretty select-text">
                         {product.description}
                     </p>
                 </div>
-                <div className="flex flex-row items-center w-full gap-5 justify-between">
-                    <h3 className="font-bold text-lg ml-2 my-1">${product.price}</h3>
+                <div className="flex flex-row items-center w-full gap-1 justify-between px-2">
+                    <div className="flex-1 flex items-center gap-1 text-lg text-nowrap text-ellipsis overflow-hidden">
+                        <svg viewBox="0 0 24 24" className="w-4 min-w-4 fill-blue-500 pt-[1.5px]">
+                            <path d="M19.965 8.521C19.988 8.347 20 8.173 20 8c0-2.379-2.143-4.288-4.521-3.965C14.786 2.802 13.466 2 12 2s-2.786.802-3.479 2.035C6.138 3.712 4 5.621 4 8c0 .173.012.347.035.521C2.802 9.215 2 10.535 2 12s.802 2.785 2.035 3.479A3.976 3.976 0 0 0 4 16c0 2.379 2.138 4.283 4.521 3.965C9.214 21.198 10.534 22 12 22s2.786-.802 3.479-2.035C17.857 20.283 20 18.379 20 16c0-.173-.012-.347-.035-.521C21.198 14.785 22 13.465 22 12s-.802-2.785-2.035-3.479zm-9.01 7.895-3.667-3.714 1.424-1.404 2.257 2.286 4.327-4.294 1.408 1.42-5.749 5.706z" />
+                        </svg>
+                        <span className="block text-nowrap text-ellipsis overflow-hidden font-bold font-link first-letter:uppercase lowercase">
+                            {product?.category?.business?.name}
+                        </span>
+                    </div>
+                    <div className="flex gap-1">
+                        <h3 className="font-bold font-link text-lg my-1 select-text line-through text-red-500 ml-auto">
+                            ${product.price + product.price * 0.2}
+                        </h3>
+                        <h3 className="font-link font-bold text-lg my-1 select-text text-green-600">
+                            ${product.price}
+                        </h3>
+                    </div>
                 </div>
                 <button
                     className="flex gap-1 justify-center items-center w-full py-2 px-3 mt-auto opacity-85 hover:opacity-100 rounded-md transition-all duration-300 bg-blue-500 text-white"
@@ -147,7 +162,7 @@ function SectionCategories({ isOpen, categorySelected, setCategorySelected, cate
     return (
         <div
             className={cls(
-                "scroll-style absolute top-0 z-10 max-h-[calc(100vh-190px)] w-full overflow-y-auto bg-white rounded-md pr-1 shadow-xl",
+                "scroll-style absolute top-0 z-10 max-h-[calc(100vh-190px)] w-full overflow-y-auto bg-white rounded-md pr-1 shadow-xl mb-auto",
                 "lg:sticky lg:top-20 lg:flex-1 lg:max-w-48",
                 {
                     "max-h-0 opacity-0 lg:max-h-[calc(100vh-190px)] lg:opacity-100": !isOpen,

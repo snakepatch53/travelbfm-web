@@ -48,6 +48,7 @@ export function SessionProvider({ children }) {
             if (!res) removeSession();
         });
     }, []); // eslint-disable-line
+
     const checkSession = async ({ _session }) => {
         if (!_session) return;
         if (!_session?.token) return;

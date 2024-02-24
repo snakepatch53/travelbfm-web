@@ -1,8 +1,14 @@
 import PageContent from "../component/PageContent";
+import { cls } from "../utils/utils";
 
-export default function Loading() {
+export default function Loading({ classWrapper = "" }) {
     return (
-        <PageContent className="flex justify-center items-center h-screen w-full px-[--padding]">
+        <PageContent
+            className={cls(
+                "flex justify-center items-center h-screen w-full px-[--padding]",
+                classWrapper
+            )}
+        >
             <div className="container flex flex-col justify-center items-center gap-2">
                 <svg viewBox="0 0 38 38" className="max-w-14">
                     <defs>

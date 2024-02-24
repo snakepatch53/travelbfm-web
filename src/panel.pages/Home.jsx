@@ -5,24 +5,16 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, EffectFade } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/effect-fade";
-import { useEffect, useState } from "react";
-import { getBusinesses } from "../services/businesses";
-import { getProductsWithCategory } from "../services/products";
+import { useContext } from "react";
+import { InfoContext } from "../context/info";
 
 export default function Home() {
-    const [business, setBusiness] = useState(null);
-    const [products, setProducts] = useState([]);
-
-    useEffect(() => {
-        getBusinesses().then((data) => setBusiness(data));
-        getProductsWithCategory().then((data) => setProducts(data));
-    }, []);
-
+    const { businesses, products } = useContext(InfoContext);
     return (
         <PageContent className="relative w-full">
             <CrudBackground src="/image/food4.jpg" withBlur={false} />
             <div className="relative z-10 gap-5 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 p-2">
-                {business?.map((item) => (
+                {businesses?.map((item) => (
                     <div key={item.id} className="relative w-full h-full">
                         <Item
                             to={"/panel/shop/" + item.id}
@@ -33,8 +25,7 @@ export default function Home() {
                         />
                     </div>
                 ))}
-
-                {!business && (
+                {!businesses && (
                     <>
                         <SkullItem />
                         <SkullItem />
@@ -88,7 +79,7 @@ function Item({ to, products, ...business }) {
                 <img src={business.logo_url} className="max-w-10 rounded-full aspect-square " />
                 <div className="flex flex-col w-full h-full">
                     <h3 className="font-link text-xl text-[--c1-txt]">{business.name}</h3>
-                    <span className="font-content text-xs opacity-60 text-[--c1-txt]">
+                    <span className="max-h-10 min-h-10 h-full font-content text-xs opacity-60 text-[--c1-txt] overflow-hidden text-pretty select-text">
                         {business.description}
                     </span>
                 </div>
