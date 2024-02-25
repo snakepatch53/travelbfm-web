@@ -132,7 +132,7 @@ function Item({ onchangeState, buttonIsLoading, ...item }) {
             />
             <div className="">
                 <div className="flex flex-col w-full aspect-square bg-[--c6-bg] items-center justify-center overflow-hidden rounded-md">
-                    <img src="/img/deliverywoman.png" className="w-full h-full object-cover" />
+                    <img src={item?.user?.photo_url} className="w-full h-full object-cover" />
                 </div>
 
                 <div className="w-full flex flex-col items-center py-2">

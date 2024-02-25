@@ -1,1 +1,0 @@
-import{j as t,P as o}from"./index-BTbKq4bm.js";import{B as r}from"./Banner-zNI-Oy1E.js";import{H as s}from"./History-Cd0Sfiai.js";import"./Title-BY9rvRfN.js";function m(){return t.jsxs(o,{children:[t.jsx(r,{title:"Acerca de Nosotros"}),t.jsx("section",{children:t.jsx(s,{})})]})}export{m as default};
