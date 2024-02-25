@@ -13,30 +13,49 @@ export default function Home() {
     return (
         <PageContent className="relative w-full">
             <CrudBackground src="/image/food4.jpg" withBlur={false} />
-            <div className="relative z-10 gap-5 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 p-2">
-                {businesses?.map((item) => (
-                    <div key={item.id} className="relative w-full h-full">
-                        <Item
-                            to={"/panel/shop/" + item.id}
-                            {...item}
-                            products={products.filter(
-                                (product) => product?.category?.business_id == item.id
-                            )}
-                        />
-                    </div>
-                ))}
-                {!businesses && (
-                    <>
-                        <SkullItem />
-                        <SkullItem />
-                        <SkullItem />
-                        <SkullItem />
-                        <SkullItem />
-                        <SkullItem />
-                    </>
-                )}
+
+            <div className="relative z-10 flex flex-col gap-5">
+                <Title text="Locales disponibles " />
+
+                <div className="gap-5 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 p-2">
+                    {businesses?.map((item) => (
+                        <div key={item.id} className="relative w-full h-full">
+                            <Item
+                                to={"/panel/shop/" + item.id}
+                                {...item}
+                                products={products.filter(
+                                    (product) => product?.category?.business_id == item.id
+                                )}
+                            />
+                        </div>
+                    ))}
+                    {!businesses && (
+                        <>
+                            <SkullItem />
+                            <SkullItem />
+                            <SkullItem />
+                            <SkullItem />
+                            <SkullItem />
+                            <SkullItem />
+                        </>
+                    )}
+                </div>
             </div>
         </PageContent>
+    );
+}
+
+function Title({ text }) {
+    return (
+        <h3
+            className="font-title2 text-6xl text-white text-center select-text mt-5"
+            style={{
+                textShadow:
+                    "1px 0 1px var(--c6-bg), -1px 0 1px var(--c6-bg), 0 1px 1px var(--c6-bg), 0 -1px 1px var(--c6-bg)",
+            }}
+        >
+            {text}
+        </h3>
     );
 }
 
