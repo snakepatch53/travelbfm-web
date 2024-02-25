@@ -3,7 +3,7 @@ import { useEffect } from "react";
 
 export default function PageContent({ fade = true, ...props }) {
     useEffect(() => {
-        // window.scrollTo(0, 0);
+        window.scrollTo(0, 0);
     }, []);
     let initial = { opacity: 0 };
     let animate = { opacity: 1 };
