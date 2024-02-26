@@ -34,10 +34,10 @@ export default function Orders() {
         <PageContent className="w-full">
             <CrudBackground src="/image/food6.jpg" />
             <div className="relative z-10 flex flex-col gap-5">
-                <Title text="Pedidos" />
+                {carts != null && session.role != "Cliente" && <Title text="Pedidos" />}
                 <ItemsAdmin session={session} carts={carts} setCarts={handleSetCarts} />
                 <ItemsSeller session={session} carts={carts} />
-                <Title text="Mis pedidos" />
+                {carts != null && <Title text="Mis Pedidos" />}
                 <ItemsClient session={session} carts={carts} />
             </div>
         </PageContent>
