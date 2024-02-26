@@ -124,7 +124,7 @@ export default function useCrudPanel({
 
         if (!extraValidations($form, showWarnningNotification, validator)) return;
 
-        const formData = new FormData($form);
+        const formData = validator.getFormDataFieldsNotVoid($form);
         showProgress(true);
         if (selectedItem) return handleUpdate(formData);
         return handleNew(formData);

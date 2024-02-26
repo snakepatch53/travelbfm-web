@@ -16,7 +16,7 @@ export default function Header({ info, onClickButtonBars }) {
                 }}
             >
                 <span
-                    className="block w-[200px] max-w-full h-full px-[10px] text-[16px] tracking-[0.7px] text-[--c5-txt] whitespace-nowrap text-ellipsis overflow-hidden leading-[3.1] bg-black/20 border border-r border-black/20 text-center"
+                    className="hidden sm:block w-[200px] max-w-full h-full px-[10px] text-[16px] tracking-[0.7px] text-[--c5-txt] whitespace-nowrap text-ellipsis overflow-hidden leading-[3.1] bg-black/20 border border-r border-black/20 text-center"
                     style={{
                         textShadow: "0 0 1px var(--c6-txt)",
                     }}

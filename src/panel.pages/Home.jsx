@@ -27,7 +27,7 @@ export default function Home() {
             <div className="relative z-10 flex flex-col gap-5">
                 <Title text="Locales disponibles " />
 
-                <div className="gap-5 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 p-2">
+                <div className="gap-5 grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 p-2">
                     {filtreds?.map((item) => (
                         <div key={item.id} className="relative w-full h-full">
                             <Item
@@ -76,9 +76,9 @@ function Item({ to, products, ...business }) {
             className="flex flex-col items-center w-full h-full bg-[--c5-bg]  pb-2 rounded-lg font-content shadow-xl overflow-hidden hover:scale-105"
         >
             {/* En caso de tener varios productos ponemos un slider para que se puedan ver */}
-            {products?.length >= 2 && (
-                <div className="relative w-full">
-                    <CoverSchedule business={business} />
+            <div className="relative w-full">
+                <CoverSchedule business={business} />
+                {products?.length >= 2 && (
                     <Swiper
                         className="w-full "
                         modules={[Autoplay, EffectFade]}
@@ -97,16 +97,19 @@ function Item({ to, products, ...business }) {
                             </SwiperSlide>
                         ))}
                     </Swiper>
-                </div>
-            )}
-            {/* En caso de que solo tenga 1 producto ponemos sin el slider */}
-            {products.length == 1 && (
-                <img src={products[0].photo_url} className=" w-full aspect-video object-cover " />
-            )}
-            {/* En caso de que no tenga productos ponemos una imagen por defecto */}
-            {products.length == 0 && (
-                <img src="/image/food2.jpg" className=" w-full aspect-video object-cover " />
-            )}
+                )}
+                {/* En caso de que solo tenga 1 producto ponemos sin el slider */}
+                {products.length == 1 && (
+                    <img
+                        src={products[0].photo_url}
+                        className=" w-full aspect-video object-cover "
+                    />
+                )}
+                {/* En caso de que no tenga productos ponemos una imagen por defecto */}
+                {products.length == 0 && (
+                    <img src="/image/food2.jpg" className=" w-full aspect-video object-cover " />
+                )}
+            </div>
             <div className="flex flex-row w-full px-2 pt-2 items-start  gap-5 ">
                 <img src={business.logo_url} className="max-w-10 rounded-full aspect-square " />
                 <div className="flex flex-col w-full h-full">
@@ -147,7 +150,7 @@ function CoverSchedule({ business }) {
         <>
             {!business.open && (
                 <div
-                    className="absolute inset-0 z-10 bg-black/80 flex flex-col justify-center items-center text-white"
+                    className="absolute inset-0 z-10 bg-black/80 flex flex-col justify-center items-center text-white overflow-hidden"
                     style={{
                         textShadow:
                             "1px 0 1px #000, -1px 0 1px #000, 0 1px 1px #000, 0 -1px 1px #000",

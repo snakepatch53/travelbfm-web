@@ -99,6 +99,7 @@ export default function ShopCart() {
                         <tr className="sticky z-10 top-0 bg-[--c4-bg]">
                             <th className="font-link py-3">Imagen</th>
                             <th className="font-link py-3">Producto</th>
+                            <th className="font-link py-3">Negocio</th>
                             <th className="font-link py-3">Precio</th>
                             <th className="font-link py-3">Cantidad</th>
                             <th className="font-link py-3">Subtotal</th>
@@ -118,7 +119,7 @@ export default function ShopCart() {
                     </tbody>
                     <tfoot>
                         <tr>
-                            <td colSpan="3"></td>
+                            <td colSpan="4"></td>
                             <td className="font-link font-bold">Total:</td>
                             <td>
                                 $
@@ -159,6 +160,7 @@ function ProductItem({ remove, addQuantity, removeQuantity, ...product }) {
                 />
             </td>
             <td className="font-link">{product.name}</td>
+            <td className="font-link">{product?.category?.business?.name}</td>
             <td className="font-link">${product.price}</td>
             <td>
                 <InputQuantity value={product.quantity} add={addQuantity} remove={removeQuantity} />

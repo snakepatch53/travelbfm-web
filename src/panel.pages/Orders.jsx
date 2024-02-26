@@ -2,7 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import PageContent from "../component/PageContent";
 import CrudBackground from "../panel.components/CrudBackground";
 import { getCartsAllData, updateCartState } from "../services/carts";
-import { cls } from "../utils/utils";
+import { cls, separateCarts } from "../utils/utils";
 import { faCheck, faFilePdf, faTimes } from "@fortawesome/free-solid-svg-icons";
 import Button from "../panel.components/Button";
 import { SessionContext } from "../context/session";
@@ -15,25 +15,40 @@ export default function Orders() {
     useEffect(() => {
         getCartsAllData().then((res) => {
             if (!res) return;
-            setCarts(res);
+            setCarts(orderCarts(res));
         });
     }, []);
 
+    const handleSetCarts = (_carts) => {
+        if (_carts) setCarts(orderCarts(_carts));
+    };
+
+    const orderCarts = (_carts) => {
+        return _carts.sort((a) => {
+            if (a.state == "Pendiente") return -1;
+            if (a.state == "Entregado") return 1;
+            return 0;
+        });
+    };
     return (
         <PageContent className="w-full">
             <CrudBackground src="/image/food6.jpg" />
             <div className="relative z-10 flex flex-col gap-5">
-                {(session.role == "Administrador" || session.role == "Vendedor") && (
-                    <Items session={session} carts={carts} setCarts={setCarts} />
-                )}
-                <Items session={session} carts={carts} setCarts={setCarts} my={true} />
+                <Title text="Pedidos" />
+                <ItemsAdmin session={session} carts={carts} setCarts={handleSetCarts} />
+                <ItemsSeller session={session} carts={carts} />
+                <Title text="Mis pedidos" />
+                <ItemsClient session={session} carts={carts} />
             </div>
         </PageContent>
     );
 }
 
-function Items({ session, carts, setCarts, my = false }) {
+// excalidraw
+
+function ItemsAdmin({ session, carts, setCarts }) {
     const [loading, setLoading] = useState(false);
+    if (session.role != "Administrador") return null;
     const handleChangeState = (item) => {
         const { id, state } = item;
         return () => {
@@ -57,40 +72,42 @@ function Items({ session, carts, setCarts, my = false }) {
             });
         };
     };
-    let filtred = null;
-    if (my) {
-        filtred = carts?.filter((item) => item?.user_id == session.id) || [];
-    } else {
-        if (session.role == "Administrador") filtred = carts;
-        else {
-            filtred =
-                carts?.filter((item) => {
-                    if (!item?.product_carts?.length) return;
-                    return (
-                        item?.product_carts[0]?.product?.category?.business?.user_id == session.id
-                    );
-                }) || [];
-        }
-    }
-    // order by state
-    filtred = filtred?.sort((a) => {
-        if (a.state == "Pendiente") return -1;
-        if (a.state == "Entregado") return 1;
-        return 0;
+    return (
+        <Items onUpdate={handleChangeState} isLoading={loading} carts={carts} setCarts={setCarts} />
+    );
+}
+
+function ItemsSeller({ session, carts }) {
+    if (session.role != "Vendedor") return null;
+    const extendedCarts = separateCarts(carts);
+    const filteredCarts = extendedCarts?.filter((item) => {
+        item.pdf_url =
+            item.pdf_seller_url + "/" + item?.product_carts[0]?.product?.category?.business_id;
+        return item?.product_carts[0]?.product?.category?.business?.user_id == session.id;
     });
+    return <Items carts={filteredCarts} />;
+}
+
+function ItemsClient({ session, carts }) {
+    const filteredCarts = carts?.filter((item) => item?.user_id == session.id);
+    return <Items carts={filteredCarts} />;
+}
+
+function Items({ isLoading = false, onUpdate = false, carts }) {
     return (
         <>
-            {filtred?.length > 0 && <Title text={my ? "Mis pedidos" : "Pedidos"} />}
             {carts == null && <Title text="Cargando pedidos.." />}
             <div className="grid gap-5 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5">
-                {filtred?.map((item) => (
-                    <Item
-                        key={item.id}
-                        onchangeState={my ? null : handleChangeState(item)}
-                        buttonIsLoading={loading}
-                        {...item}
-                    />
-                ))}
+                {carts?.map((item) => {
+                    return (
+                        <Item
+                            key={item.key || item.id}
+                            onchangeState={onUpdate ? onUpdate(item) : null}
+                            buttonIsLoading={isLoading}
+                            {...item}
+                        />
+                    );
+                })}
                 {carts == null && (
                     <>
                         <SkullItem />

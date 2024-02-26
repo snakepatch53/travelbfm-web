@@ -8,7 +8,9 @@ export const ShopCartContext = createContext();
 // 2. Crear el provider
 export function ShopCartProvider({ children }) {
     const [shopCart, setShopCart] = useState([]);
+
     const addProduct = (product) => {
+        // no se puede comprar si el negocio esta cerrado
         if (!getOpenBusiness(product?.category?.business)) {
             return showNotification({
                 title: "Negocio cerrado",
@@ -18,27 +20,39 @@ export function ShopCartProvider({ children }) {
         }
 
         // no se puede comprar de distintos negocios
-        if (
-            shopCart?.length > 0 &&
-            shopCart[0]?.category?.business?.id != product?.category?.business?.id
-        ) {
-            return showNotification({
-                title: "No se puede comprar",
-                message: "No se puede comprar de distintos negocios",
-                type: "warning",
-            });
-        }
+        // if (
+        //     shopCart?.length > 0 &&
+        //     shopCart[0]?.category?.business?.id != product?.category?.business?.id
+        // ) {
+        //     return showNotification({
+        //         title: "No se puede comprar",
+        //         message: "No se puede comprar de distintos negocios",
+        //         type: "warning",
+        //     });
+        // }
+
+        // Si ya existe el producto en el carrito, aumentar la cantidad
         const exist = shopCart.find((item) => item.id == product.id);
+        let newProduct = { ...product, quantity: 1 };
         if (exist) {
-            setShopCart(
-                shopCart.map((item) =>
-                    item.id == product.id ? { ...exist, quantity: exist.quantity + 1 } : item
-                )
-            );
+            newProduct = { ...exist, quantity: exist.quantity + 1 };
+            // setShopCart(
+            //     shopCart.map((item) =>
+            //         item.id == product.id ? { ...exist, quantity: exist.quantity + 1 } : item
+            //     )
+            // );
         } else {
-            setShopCart([...shopCart, { ...product, quantity: 1 }]);
+            // setShopCart([...shopCart, { ...product, quantity: 1 }]);
         }
+
+        setShopCart(
+            orderShopCart(shopCart.filter((item) => item.id != product.id).concat(newProduct))
+        );
+
+        // traigo lo que ya tengo en localStorage
         const cartFromStorage = JSON.parse(window.localStorage.getItem("shopCart"));
+
+        // si ya tengo algo en localStorage
         if (cartFromStorage) {
             const exist = cartFromStorage.find((item) => item.id === product.id);
             if (exist) {
@@ -59,6 +73,7 @@ export function ShopCartProvider({ children }) {
                 );
             }
         } else {
+            // si no tengo nada en localStorage lo creo
             window.localStorage.setItem("shopCart", JSON.stringify([{ ...product, quantity: 1 }]));
         }
         showNotification({
@@ -147,9 +162,16 @@ export function ShopCartProvider({ children }) {
     useEffect(() => {
         const cartFromStorage = JSON.parse(window.localStorage.getItem("shopCart"));
         if (cartFromStorage) {
-            setShopCart(cartFromStorage);
+            setShopCart(orderShopCart(cartFromStorage));
         }
-    }, []);
+    }, []); // eslint-disable-line
+
+    const orderShopCart = (_shopCart) => {
+        const _reorder = _shopCart.sort(
+            (a, b) => a?.category?.business?.id - b?.category?.business?.id
+        );
+        return _reorder;
+    };
 
     return (
         <ShopCartContext.Provider

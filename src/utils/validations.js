@@ -113,3 +113,14 @@ export function isValidateRequired($form, notRequired = []) {
 export function resetForm($form) {
     $form.reset();
 }
+
+export function getFormDataFieldsNotVoid($form) {
+    const formData = new FormData($form);
+    const formDataFieldsNotVoid = new FormData();
+    for (let [key, value] of formData.entries()) {
+        if (value) {
+            formDataFieldsNotVoid.append(key, value);
+        }
+    }
+    return formDataFieldsNotVoid;
+}

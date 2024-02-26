@@ -13,6 +13,7 @@
     /* background: var(--color4-bg); */
     background: var(--c4-bg);
     overflow-y: auto;
+    overflow-x: hidden;
 }
 
 .panel-page .panel-sidebar-component img.user_img {
@@ -114,19 +115,11 @@
     .panel-page-content .panel-sidebar-component {
         position: fixed;
         z-index: 500;
-        top: 0;
         left: 0;
-        padding: 50px 0 0 0;
-        opacity: 1;
-        overflow-x: inherit;
     }
 
     .panel-page-state.close ~ .panel-page-content .panel-sidebar-component {
-        width: 0px;
-        min-width: 0px;
-        padding: 0;
-        overflow: hidden;
-        opacity: 0;
+        left: -100%;
     }
 
     .panel-page-state.close ~ .panel-page-content .panel-sidebar-component img.user_img {
