@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 // import { getCategories } from "../services/categories";
 // import { getProductsWithCategoryAndBusiness } from "../services/products";
 import { InfoContext } from "../context/info";
+import { getOpenBusiness } from "../utils/utils";
 
 export default function useShop() {
     const { categories: _categories, products: _products } = useContext(InfoContext);
@@ -13,8 +14,8 @@ export default function useShop() {
     const [categorySelected, setCategorySelected] = useState(0);
     useEffect(() => {
         if (!business_id) {
-            setProducts(_products);
-            setCategories(_categories);
+            setProducts(_products?.filter((item) => getOpenBusiness(item.category?.business)));
+            setCategories(_categories?.filter((item) => getOpenBusiness(item?.business)));
             return;
         }
         setProducts(_products?.filter((item) => item.category?.business_id == business_id));

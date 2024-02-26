@@ -5,11 +5,21 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, EffectFade } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/effect-fade";
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { InfoContext } from "../context/info";
+import { cls, getOpenBusiness } from "../utils/utils";
 
 export default function Home() {
     const { businesses, products } = useContext(InfoContext);
+    const [filtreds, setFiltreds] = useState(null);
+    useEffect(() => {
+        if (businesses) {
+            // order by open business
+            const _reorder = businesses.sort((a, b) => getOpenBusiness(b) - getOpenBusiness(a));
+            const _maped = _reorder.map((item) => ({ ...item, open: getOpenBusiness(item) }));
+            setFiltreds(_maped);
+        }
+    }, [businesses]);
     return (
         <PageContent className="relative w-full">
             <CrudBackground src="/image/food4.jpg" withBlur={false} />
@@ -18,7 +28,7 @@ export default function Home() {
                 <Title text="Locales disponibles " />
 
                 <div className="gap-5 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 p-2">
-                    {businesses?.map((item) => (
+                    {filtreds?.map((item) => (
                         <div key={item.id} className="relative w-full h-full">
                             <Item
                                 to={"/panel/shop/" + item.id}
@@ -29,7 +39,7 @@ export default function Home() {
                             />
                         </div>
                     ))}
-                    {!businesses && (
+                    {!filtreds && (
                         <>
                             <SkullItem />
                             <SkullItem />
@@ -62,29 +72,32 @@ function Title({ text }) {
 function Item({ to, products, ...business }) {
     return (
         <Link
-            to={to}
-            className=" flex flex-col items-center w-full h-full bg-[--c5-bg]  pb-5 rounded-lg font-content shadow-xl overflow-hidden hover:scale-105"
+            to={business.open ? to : ""}
+            className="flex flex-col items-center w-full h-full bg-[--c5-bg]  pb-2 rounded-lg font-content shadow-xl overflow-hidden hover:scale-105"
         >
             {/* En caso de tener varios productos ponemos un slider para que se puedan ver */}
             {products?.length >= 2 && (
-                <Swiper
-                    className="w-full "
-                    modules={[Autoplay, EffectFade]}
-                    effect="fade"
-                    autoplay={{ delay: 3000 }}
-                    speed={3000}
-                    loop={true}
-                    slidesPerView={1}
-                >
-                    {products.map((item) => (
-                        <SwiperSlide key={item.id} className="relative w-full h-full">
-                            <img
-                                src={item.photo_url}
-                                className=" w-full aspect-video object-cover "
-                            />
-                        </SwiperSlide>
-                    ))}
-                </Swiper>
+                <div className="relative w-full">
+                    <CoverSchedule business={business} />
+                    <Swiper
+                        className="w-full "
+                        modules={[Autoplay, EffectFade]}
+                        effect="fade"
+                        autoplay={{ delay: 3000 }}
+                        speed={3000}
+                        loop={true}
+                        slidesPerView={1}
+                    >
+                        {products.map((item) => (
+                            <SwiperSlide key={item.id} className="relative w-full h-full">
+                                <img
+                                    src={item.photo_url}
+                                    className=" w-full aspect-video object-cover "
+                                />
+                            </SwiperSlide>
+                        ))}
+                    </Swiper>
+                </div>
             )}
             {/* En caso de que solo tenga 1 producto ponemos sin el slider */}
             {products.length == 1 && (
@@ -94,7 +107,7 @@ function Item({ to, products, ...business }) {
             {products.length == 0 && (
                 <img src="/image/food2.jpg" className=" w-full aspect-video object-cover " />
             )}
-            <div className="flex flex-row w-full p-2 items-start  gap-5 ">
+            <div className="flex flex-row w-full px-2 pt-2 items-start  gap-5 ">
                 <img src={business.logo_url} className="max-w-10 rounded-full aspect-square " />
                 <div className="flex flex-col w-full h-full">
                     <h3 className="font-link text-xl text-[--c1-txt]">{business.name}</h3>
@@ -103,6 +116,14 @@ function Item({ to, products, ...business }) {
                     </span>
                 </div>
             </div>
+            <h4
+                className={cls("font-link", {
+                    "text-green-500": business.open,
+                    "text-red-500": !business.open,
+                })}
+            >
+                {business.open ? "Abierto" : "Cerrado"}{" "}
+            </h4>
         </Link>
     );
 }
@@ -118,5 +139,46 @@ function SkullItem() {
                 </div>
             </div>
         </div>
+    );
+}
+
+function CoverSchedule({ business }) {
+    return (
+        <>
+            {!business.open && (
+                <div
+                    className="absolute inset-0 z-10 bg-black/80 flex flex-col justify-center items-center text-white"
+                    style={{
+                        textShadow:
+                            "1px 0 1px #000, -1px 0 1px #000, 0 1px 1px #000, 0 -1px 1px #000",
+                    }}
+                >
+                    <ul className="opacity-70 select-text">
+                        <li>
+                            <b>Lunes: </b> {business.monday_open} - {business.monday_close}
+                        </li>
+                        <li>
+                            <b>Martes: </b> {business.tuesday_open} - {business.tuesday_close}
+                        </li>
+                        <li>
+                            <b>Miercoles: </b> {business.wednesday_open} -{" "}
+                            {business.wednesday_close}
+                        </li>
+                        <li>
+                            <b>Jueves: </b> {business.thursday_open} - {business.thursday_close}
+                        </li>
+                        <li>
+                            <b>Viernes: </b> {business.friday_open} - {business.friday_close}
+                        </li>
+                        <li>
+                            <b>Sabado: </b> {business.saturday_open} - {business.saturday_close}
+                        </li>
+                        <li>
+                            <b>Domingo: </b> {business.sunday_open} - {business.sunday_close}
+                        </li>
+                    </ul>
+                </div>
+            )}
+        </>
     );
 }

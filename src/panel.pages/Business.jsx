@@ -197,6 +197,37 @@ export default function Business() {
                         </option>
                     ))}
                 </CrudFormInput>
+
+                {/* 
+                Monday
+                Tuesday
+                Wednesday
+                Thursday
+                Friday
+                Saturday
+                Sunday
+                */}
+
+                <CrudFormInput type="time" label="Lunes - Inicio" name="monday_open" />
+                <CrudFormInput type="time" label="Lunes - Fin" name="monday_close" />
+
+                <CrudFormInput type="time" label="Martes - Inicio" name="tuesday_open" />
+                <CrudFormInput type="time" label="Martes - Fin" name="tuesday_close" />
+
+                <CrudFormInput type="time" label="Miércoles - Inicio" name="wednesday_open" />
+                <CrudFormInput type="time" label="Miércoles - Fin" name="wednesday_close" />
+
+                <CrudFormInput type="time" label="Jueves - Inicio" name="thursday_open" />
+                <CrudFormInput type="time" label="Jueves - Fin" name="thursday_close" />
+
+                <CrudFormInput type="time" label="Viernes - Inicio" name="friday_open" />
+                <CrudFormInput type="time" label="Viernes - Fin" name="friday_close" />
+
+                <CrudFormInput type="time" label="Sábado - Inicio" name="saturday_open" />
+                <CrudFormInput type="time" label="Sábado - Fin" name="saturday_close" />
+
+                <CrudFormInput type="time" label="Domingo - Inicio" name="sunday_open" />
+                <CrudFormInput type="time" label="Domingo - Fin" name="sunday_close" />
             </CrudForm>
 
             <CrudConfirm

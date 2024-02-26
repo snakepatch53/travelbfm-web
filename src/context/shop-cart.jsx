@@ -1,5 +1,6 @@
 import { createContext, useEffect, useState } from "react";
 import { showNotification } from "../component/Notification";
+import { getOpenBusiness } from "../utils/utils";
 
 // 1. Crear el contexto
 export const ShopCartContext = createContext();
@@ -8,6 +9,14 @@ export const ShopCartContext = createContext();
 export function ShopCartProvider({ children }) {
     const [shopCart, setShopCart] = useState([]);
     const addProduct = (product) => {
+        if (!getOpenBusiness(product?.category?.business)) {
+            return showNotification({
+                title: "Negocio cerrado",
+                message: "El negocio se encuentra cerrado",
+                type: "warning",
+            });
+        }
+
         // no se puede comprar de distintos negocios
         if (
             shopCart?.length > 0 &&

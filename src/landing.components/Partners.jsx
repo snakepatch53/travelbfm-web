@@ -48,11 +48,21 @@ export default function Partners() {
                 ))}
                 {!businesses && (
                     <>
-                        <SkullItem />
-                        <SkullItem />
-                        <SkullItem />
-                        <SkullItem />
-                        <SkullItem />
+                        <SwiperSlide>
+                            <SkullItem />
+                        </SwiperSlide>
+                        <SwiperSlide>
+                            <SkullItem />
+                        </SwiperSlide>
+                        <SwiperSlide>
+                            <SkullItem />
+                        </SwiperSlide>
+                        <SwiperSlide>
+                            <SkullItem />
+                        </SwiperSlide>
+                        <SwiperSlide>
+                            <SkullItem />
+                        </SwiperSlide>
                     </>
                 )}
             </Swiper>
